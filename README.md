@@ -3,7 +3,7 @@
 This Project is imitation Tmall website for using python based on the development of Django framework
 
 python2.7
-django1.8
+django1.9
 
 ## 开发目的
 + 首先是，对过往python学习的一次总结，因为之后打算从事wab后端开发。因此动手写一个项目是对知识点的一次梳理
