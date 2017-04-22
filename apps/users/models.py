@@ -25,6 +25,7 @@ class UserProfile(AbstractUser):
         return self.username
 
 
+
 #邮箱验证码
 class EmailVerifyRecord(models.Model):
     code = models.CharField(max_length=8,verbose_name=u"验证码")
