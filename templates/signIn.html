@@ -41,7 +41,7 @@
 					</span>
 					<input id="password" name="password" type="password" placeholder="密码" type="text">
 				</div>
-				<span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
+				<span class="text-danger">{% for key,error in login_form.errors.items %}{{ key }}{{ "是必填项" }}{% endfor %}{{ msg }}</span><br><br>
 			
 				<div>
 					<a class="notImplementLink" href="#nowhere">忘记登录密码</a> 
@@ -66,7 +66,7 @@
 					</div>
 
 					<div class="login_acount_text">账号登录</div>
-					<div class="loginInput">
+					<div class="loginInput" >
 						<span class="loginInputIcon ">
 							<span class=" glyphicon glyphicon-user"></span>
 						</span>
@@ -79,7 +79,7 @@
 							</span>
 							<input id="password" name="password"  type="password" placeholder="密码" type="text">	
 					</div>
-					<span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
+					<span class="text-danger">{{ msg }}</span><br><br>
 					<div>
 						<a href="#nowhere">忘记登录密码</a> 
 						<a href="#nowhere" class="pull-right">免费注册</a>
