@@ -20,6 +20,7 @@
 
 
         {% if request.user.is_authenticated %}
+            <a href="/signIn/">Hi,{{ request.user.username }}</a>
             <a href="#nowhere">积分</a>
             <a href="#nowhere">消息</a>
             <a href="#nowhere">退出</a>
