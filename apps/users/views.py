@@ -38,16 +38,5 @@ class LoginView(View):
             return render(request, "signIn.html", {"login_form":login_form})
 
 
-# def user_login(request):
-#     if request.method == "POST":
-#         user_name = request.POST.get("username", "")
-#         pass_word = request.POST.get("password", "")
-#         user = authenticate(username=user_name, password=pass_word)
-#         if user is not None:
-#             login(request, user)
-#             return render(request, "index.html")
-#         else:
-#             return render(request, "signIn.html", {"msg": "用户名或密码错误"})
-#
-#     elif request.method == "GET":
-#         return render(request, "signIn.html", {})
+class RegisterView(View):
+    pass
