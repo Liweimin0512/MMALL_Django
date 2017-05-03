@@ -3,9 +3,9 @@
 <html>
 {% load staticfiles %}
 <head>
-    <script src="/static/js/jquery/2.0.0/jquery.min.js"></script>
-    <link href="/static/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
-    <script src="/static/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery/2.0.0/jquery.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     <script type="text/javascript" src="/static/js/public.js"></script>
 </head>
@@ -44,7 +44,7 @@
 </nav>
 
     <a href="#nowhere">
-        <img id="logo" src="/static/img/site/logo.gif" class="logo">
+        <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
     </a>
     
     <form  method="post" >  
@@ -137,7 +137,7 @@ $(function(){
 });
 </script>
 
-<img src="/static/img/site/catear.png" id="catear" class="catear"/>
+<img src="{% static 'img/site/catear.png' %}" id="catear" class="catear"/>
     
 <div class="categoryWithCarousel">
 
@@ -150,8 +150,8 @@ $(function(){
     </div>
     
     <div class="rightMenu">
-        <span><a href="#nowhere"><img src="/static/img/site/chaoshi.png"/></a></span>
-        <span><a href="#nowhere"><img src="/static/img/site/guoji.png"/></a></span>
+        <span><a href="#nowhere"><img src="{% static 'img/site/chaoshi.png' %}"/></a></span>
+        <span><a href="#nowhere"><img src="{% static 'img/site/guoji.png' %}"/></a></span>
 
                 <span>
                 <a href="#nowhere">
@@ -6043,17 +6043,17 @@ $(function(){
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img class="carousel carouselImage" src="/static/img/lunbo/1.jpg" >
+      <img class="carousel carouselImage" src="{% static 'img/lunbo/1.jpg' %}" >
     </div>
     <div class="item">
-      <img  class="carouselImage" src="/static/img/lunbo/2.jpg" >
+      <img  class="carouselImage" src="{% static 'img/lunbo/2.jpg' %}" >
     </div>
     <div class="item">
-        <img  class="carouselImage" src="/static/img/lunbo/3.jpg" >
+        <img  class="carouselImage" src="{% static 'img/lunbo/3.jpg' %}" >
     </div>
 
     <div class="item">
-        <img  class="carouselImage" src="/static/img/lunbo/4.jpg" >
+        <img  class="carouselImage" src="{% static 'img/lunbo/4.jpg' %}" >
     </div>
 
   </div>
@@ -6085,7 +6085,7 @@ $(function(){
                 <div style="clear:both"></div>
                 
                         <div class="productItem" >
-                            <a href="#nowhere"><img width="100px" src="/static/img/productSingle_middle/676.jpg"></a>
+                            <a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/676.jpg' %}"></a>
                             <a class="productItemDescLink" href="#nowhere">
                                 <span class="productItemDesc">[热销]
                                 夏普屏PANDA/熊猫 LE39D71S

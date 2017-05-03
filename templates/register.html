@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="/static/js/jquery/2.0.0/jquery.min.js"></script>
@@ -28,6 +29,10 @@
         </tr>
         <tr>
             <td class="registerTableLeftTD">密码确认</td>
+            <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" id="repeatpassword"> </td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">验证码</td>
             <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" id="repeatpassword"> </td>
         </tr>
         <tr>
