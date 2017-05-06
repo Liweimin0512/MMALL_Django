@@ -38,4 +38,4 @@ class EmailVerifyRecord(models.Model):
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
-        return '{0}({1})'.format(self.code,self.email)
+        return '{0}({1})'.format(self.code, self.email)

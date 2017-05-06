@@ -1,44 +1,45 @@
 <!DOCTYPE html>
+<html>
 {% load staticfiles %}
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="{% static 'js/jquery/2.0.0/jquery.min.js' %}"></script>
-<link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
-<script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="{% static 'js/jquery/2.0.0/jquery.min.js' %}"></script>
+    <link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <title>仿天猫注册页面</title>
 </head>
-<div class="registerDiv">
-    <table align="center" class="registerTable">
-        <tbody><tr>
-            <td class="registerTip registerTableLeftTD">设置会员名</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="registerTableLeftTD">登陆名</td>
-            <td class="registerTableRightTD">
-                <input placeholder="会员名一旦设置成功，无法修改" name="name" id="name"> 
-            </td>
-        </tr>
-        <tr>
-            <td class="registerTip registerTableLeftTD">设置登陆密码</td>
-            <td class="registerTableRightTD">登陆时验证，保护账号信息</td>
-        </tr>     
-        <tr>
-            <td class="registerTableLeftTD">登陆密码</td>
-            <td class="registerTableRightTD"><input type="password" placeholder="设置你的登陆密码" name="password" id="password"> </td>
-        </tr>
-        <tr>
-            <td class="registerTableLeftTD">密码确认</td>
-            <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" id="repeatpassword"> </td>
-        </tr>
-        <tr>
-            <td class="registerTableLeftTD">验证码</td>
-            <td class="registerTableLeftTD">{{ register_form.captcha }}</td>
-        </tr>
-        <tr>
-            <td class="registerButtonTD" colspan="2">
-                <a href="#nowhere"><button>提   交</button></a>
-            </td>
-        </tr>             
-    </tbody></table>
-</div>
+<body>
+    <form id="email_register_form" method="post" action="{% url 'register' %}" autocomplete="off">
+        <div class="login_acount_text">注册邮箱</div>
+        <div class="loginInput " >
+            <span class="loginInputIcon ">
+                <span class=" glyphicon glyphicon-user"></span>
+            </span>
+            <input id="username" name="email" placeholder="手机/会员名/邮箱" type="text">
+        </div>
+        <div class="login_acount_text">登陆密码</div>
+        <div class="loginInput " >
+            <span class="loginInputIcon ">
+                <span class=" glyphicon glyphicon-lock"></span>
+            </span>
+            <input id="password" name="password" type="password" placeholder="设置你的登陆密码" type="text">
+        </div>
+        <div class="login_acount_text">确认密码</div>
+        <div class="loginInput " >
+            <span class="loginInputIcon ">
+                <span class=" glyphicon glyphicon-lock"></span>
+            </span>
+            <input id="password" name="password" type="password" placeholder="请再次输入你的密码" type="text">
+        </div>
+        <div class="login_acount_text">验证码</div>
+        <div class="loginInput " >
+            {{ register_form.captcha }}
+        </div>
+        <div class="loginInput " >
+            <input class="btn btn-green" id="jsEmailRegBtn" type="submit" value="注册并登录" />
+        </div>
+        {% csrf_token %}
+</form>
+</body>
+</html>
