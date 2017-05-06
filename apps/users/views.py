@@ -22,7 +22,7 @@ class CustomBackend(ModelBackend):
 
 class LoginView(View):
     def get(self, request):
-        return render(request, "signIn.html", {})
+        return render(request, "login.html", {})
 
     def post(self, request):
         login_form = LoginForm(request.POST)
@@ -34,9 +34,9 @@ class LoginView(View):
                 login(request, user)
                 return render(request, "index.html")
             else:
-                return render(request, "signIn.html", {"msg": "用户名或密码错误"})
+                return render(request, "login.html", {"msg": "用户名或密码错误"})
         else:
-            return render(request, "signIn.html", {"login_form": login_form})
+            return render(request, "login.html", {"login_form": login_form})
 
 
 class RegisterView(View):
@@ -56,7 +56,7 @@ class RegisterView(View):
             user_profile.save()
 
             send_register_email(user_name, "register")
-            return render(request, "signIn.html")
+            return render(request, "login.html")
         else:
             return render(request, "register.html", {"register_form": register_form})
 
