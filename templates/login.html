@@ -44,7 +44,7 @@
 				<span class="text-danger">{% for key,error in login_form.errors.items %}{{ key }}{{ "是必填项" }}{% endfor %}{{ msg }}</span><br><br>
 
 				<div>
-					<a class="notImplementLink" href="#nowhere">忘记登录密码</a>
+					<a class="notImplementLink" href="{% url 'forget_pwd' %}">忘记登录密码</a>
 					<a href="{% url 'register' %}" class="pull-right">免费注册</a>
 				</div>
 				<div style="margin-top:20px">
@@ -82,8 +82,8 @@
 					</div>
 					<span class="text-danger">{{ msg }}</span><br><br>
 					<div>
-						<a href="#nowhere">忘记登录密码</a>
-						<a href="#nowhere" class="pull-right">免费注册</a>
+						<a href="{% url 'forget_pwd' %}">忘记登录密码</a>
+						<a href="{% url 'register' %}" class="pull-right">免费注册</a>
 					</div>
 					<div style="margin-top:20px">
 							<button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>

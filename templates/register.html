@@ -6,6 +6,7 @@
 <link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
 <script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+<script type="text/javascript" scr="{% static 'js/register.js' %}"></script>
 </head>
 
 <div class="registerDiv">
@@ -17,7 +18,7 @@
         </tr>
         <tr>
             <td class="registerTableLeftTD">注册邮箱</td>
-            <td class="registerTableRightTD"><input placeholder="注册邮箱一旦设置成功，无法修改" name="email" id="email"> </td>
+            <td class="registerTableRightTD"><input placeholder="注册邮箱一旦设置成功，无法修改" name="email" id="email" value="{{ register_form.email.value }}"> </td>
         </tr>
         <tr>
             <td class="registerTip registerTableLeftTD">设置登陆密码</td>
@@ -25,15 +26,18 @@
         </tr>
         <tr>
             <td class="registerTableLeftTD">登陆密码</td>
-            <td class="registerTableRightTD"><input type="password" placeholder="设置你的登陆密码" name="password" id="password"> </td>
+            <td class="registerTableRightTD"><input type="password" placeholder="设置你的登陆密码" name="password" id="password" value="{{ register_form.email.value }}"> </td>
         </tr>
         <tr>
             <td class="registerTableLeftTD">密码确认</td>
-            <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" id="repeatpassword"> </td>
+            <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" name="repeatpassword" id="repeatpassword" value="{{ register_form.email.value }}"> </td>
         </tr>
         <tr>
             <td class="registerTableLeftTD">验证码</td>
             <td class="registerTableRightTD" >{{ register_form.captcha }}</td>
+        </tr>
+        <tr>
+            <td class="registerTableRightTD">{% for key,error in register_form.errors.items %}{{ key }}{{ "是必填项" }}{% endfor %}{{ msg }}</td>
         </tr>
         <tr>
             <td class="registerButtonTD" colspan="2">
@@ -46,9 +50,4 @@
     </form>
 
 </div>
-<script type="text/javascript">
-function checkUser(){
-    document.getElementById("email_register_form").submit();
-}
-</script>
 
