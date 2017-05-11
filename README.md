@@ -29,3 +29,6 @@ This Project is imitation Tmall website for using python based on the developmen
 前端文件来源于这个网站：[HOW2J.CN](http://how2j.cn/)
 这是一个很不错的学习java web开发的网站。我直接把实战项目中的前端文件拿来用了。只做了少量修改。
 项目开发数周，由于使用到django的模板，因此已经将原前端素材改的面目全非，为了实现某些功能甚至添加了新的页面。
+
+## 脑图
+![仿天猫项目脑图](https://github.com/Liweimin0512/ImitationTmall/blob/master/XMindtmall.png?raw=true)
