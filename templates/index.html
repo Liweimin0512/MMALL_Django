@@ -27,154 +27,28 @@
 	<div class="rightMenu">
 		<span><a href="#nowhere"><img src="{% static 'img/site/chaoshi.png' %}"/></a></span>
 		<span><a href="#nowhere"><img src="{% static 'img/site/guoji.png' %}"/></a></span>
-
-				<span>
+        {% for category in all_category %}
+            {% if forloop.counter <= 4 %}
+                <span>
 				<a href="#nowhere">
-					平板电视
+					{{ category.name }}
 				</a></span>
-
-				<span>
-				<a href="#nowhere">
-					马桶
-				</a></span>
-
-				<span>
-				<a href="#nowhere">
-					沙发
-				</a></span>
-
-				<span>
-				<a href="#nowhere">
-					电热水器
-				</a></span>
-
+            {% endif %}
+        {% endfor %}
 	</div>
 
 </div>
 
 <div style="position: relative">
-
-<div class="categoryMenu">
-
-			<div cid="83" class="eachCategory">
+    <div class="categoryMenu">
+    {% for category in all_category %}
+        <div cid="{{ category.id }}" class="eachCategory">
 				<span class="glyphicon glyphicon-link"></span>
 				<a href="#nowhere">
-					平板电视
+					{{ category.name }}
 				</a>
-			</div>
-
-			<div cid="82" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					马桶
-				</a>
-			</div>
-
-			<div cid="81" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					沙发
-				</a>
-			</div>
-
-			<div cid="80" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					电热水器
-				</a>
-			</div>
-
-			<div cid="79" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					平衡车
-				</a>
-			</div>
-
-			<div cid="78" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					扫地机器人
-				</a>
-			</div>
-
-			<div cid="77" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					原汁机
-				</a>
-			</div>
-
-			<div cid="76" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					冰箱
-				</a>
-			</div>
-
-			<div cid="75" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					空调
-				</a>
-			</div>
-
-			<div cid="74" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					女表
-				</a>
-			</div>
-
-			<div cid="73" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					男表
-				</a>
-			</div>
-
-			<div cid="72" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					男士手拿包
-				</a>
-			</div>
-
-			<div cid="71" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					男士西服
-				</a>
-			</div>
-
-			<div cid="69" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					时尚男鞋
-				</a>
-			</div>
-
-			<div cid="68" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					品牌女装
-				</a>
-			</div>
-
-			<div cid="64" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					太阳镜
-				</a>
-			</div>
-
-			<div cid="60" class="eachCategory">
-				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
-					安全座椅
-				</a>
-			</div>
-
+        </div>
+    {% endfor %}
 	</div>
 </div>
 
@@ -5953,142 +5827,29 @@ $(function(){
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div class="homepageCategoryProducts">
-
-			<div class="eachHomepageCategoryProducts">
+    {% for category in all_category %}
+        <div class="eachHomepageCategoryProducts">
 				<div class="left-mark"></div>
-				<span class="categoryTitle">平板电视</span>
+				<span class="categoryTitle">{{ category.name }}</span>
 				<div style="clear:both"></div>
-
-						<div class="productItem" >
+                {% for product in all_product %}
+                    {% if product.category == category %}
+                        <div class="productItem" >
 							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/676.jpg' %}"></a>
 							<a class="productItemDescLink" href="#nowhere">
 								<span class="productItemDesc">[热销]
-								夏普屏PANDA/熊猫 LE39D71S
+								{{ product.name|slice:"20" }}
 								</span>
 						    </a>
 							<span class="productPrice">
-								1,874.25
+								{{ product.promoteprice }}
 							</span>
 						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/665.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								Changhong/长虹 65S1安卓智
-								</span>
-						    </a>
-							<span class="productPrice">
-								3,824.16
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/654.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								Hisense/海信 LED40EC52
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,439.40
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/643.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								Hisense/海信 LED49EC32
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,679.40
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/632.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								Konka/康佳 LED32S1卧室32
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,104.35
-							</span>
-						</div>
-
+                    {% endif %}
+                {% endfor %}
 				<div style="clear:both"></div>
 			</div>
-
-			<div class="eachHomepageCategoryProducts">
-				<div class="left-mark"></div>
-				<span class="categoryTitle">马桶</span>
-				<div style="clear:both"></div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/1324.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								纳蒂兰卡 1082卫浴洁具 钻石切边 坐
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,710.00
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/1313.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								德国DGPOSY超漩式彩色马桶缓降坐便器
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,799.25
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/1302.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								纳蒂兰卡1066卫浴漩冲虹吸式马桶350
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,503.00
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/1291.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								箭牌马桶/ARROW AB1118脲醛盖
-								</span>
-						    </a>
-							<span class="productPrice">
-								1,482.00
-							</span>
-						</div>
-
-						<div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/1280.jpg' %}"></a>
-							<a class="productItemDescLink" href="#nowhere">
-								<span class="productItemDesc">[热销]
-								乐洁士智能马桶高品质全自动遥控感应一体式
-								</span>
-						    </a>
-							<span class="productPrice">
-								8,512.00
-							</span>
-						</div>
-
-				<div style="clear:both"></div>
-			</div>
+    {% endfor %}
 
 	<img id="endpng" class="endpng" src="{% static 'img/site/end.png' %}">
 
