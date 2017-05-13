@@ -19,8 +19,11 @@ from django.conf.urls import url,include
 from django.views.generic import TemplateView
 import xadmin
 
+from django.views.static import serve #处理静态文件
+
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
 from product.views import ClassificationView, IndexView
+from ImitationTmall.settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -42,5 +45,8 @@ urlpatterns = [
 
     # 商品相关url
     url(r'^product', include('product.urls'), name="product"),
+
+    # 配置上传文件的访问处理函数
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
 ]

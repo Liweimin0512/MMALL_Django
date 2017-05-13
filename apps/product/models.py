@@ -62,8 +62,14 @@ class Product(models.Model):
     def __unicode__(self):
         return self.name
 
-    def get_product_image(self):
-        return self.productimage_set.all()
+    def get_title_image(self):
+        return self.productsingleimage_set.all()[0]
+
+    def get_single_image(self):
+        return self.productsingleimage_set.all()
+
+    def get_detail_image(self):
+        return self.productdetailimage_set.all()
 
     def get_property_value(self):
         return self.propertyvalue_set.all()
@@ -86,18 +92,30 @@ class PropertyValue(models.Model):
         return self.value
 
 
-class ProductImage(models.Model):
-    # 产品图片，包括标题图和详情图
-    type = models.CharField(choices=(("type_single", u"标题"), ("type_detail", u"详情")), max_length=100, verbose_name= u"图片类型")
+class ProductSingleImage(models.Model):
+    # 产品图片标题图
     product = models.ForeignKey(Product, verbose_name=u"所属商品")
-    image = models.ImageField(upload_to="produceImage/%Y/%m", default=u"image/default.png", max_length=100)
+    image = models.ImageField(upload_to="produceImage/Single", default=u"image/default.png", max_length=100)
 
     class Meta:
-        verbose_name = u"产品图片"
+        verbose_name = u"产品标题图片"
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
-        return self.product.name
+        return str(self.id)
+
+
+class ProductDetailImage(models.Model):
+    # 产品图片详情图
+    product = models.ForeignKey(Product, verbose_name=u"所属商品")
+    image = models.ImageField(upload_to="produceImage/Detail", default=u"image/default.png", max_length=100)
+
+    class Meta:
+        verbose_name = u"产品详情图片"
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return str(self.id)
 
 
 class Review(models.Model):

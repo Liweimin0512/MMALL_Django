@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic.base import View
 
-from .models import Category, Product, ProductImage
+from .models import Category, Product, ProductSingleImage, ProductDetailImage
 
 # Create your views here.
 
@@ -17,6 +17,8 @@ class IndexView(View):
     def get(self, request):
         all_category = Category.objects.all()
         all_product = Product.objects.all()
+        all_single_image = ProductSingleImage.objects.all()
+
         return render(request, "index.html", {
             "all_category": all_category,
             "all_product": all_product,

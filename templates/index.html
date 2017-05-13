@@ -5835,7 +5835,7 @@ $(function(){
                 {% for product in all_product %}
                     {% if product.category == category %}
                         <div class="productItem" >
-							<a href="#nowhere"><img width="100px" src="{% static 'img/productSingle_middle/676.jpg' %}"></a>
+							<a href="#nowhere"><img width="100px" data-url="{{ MEDIA_URL }}{{ product.get_title_image.image }}" src="..{{ MEDIA_URL }}{{ product.get_title_image.image }}"></a>
 							<a class="productItemDescLink" href="#nowhere">
 								<span class="productItemDesc">[热销]
 								{{ product.name|slice:"20" }}
