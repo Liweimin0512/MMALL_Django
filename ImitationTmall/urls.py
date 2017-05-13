@@ -19,15 +19,13 @@ from django.views.generic import TemplateView
 import xadmin
 
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
-from product.views import ClassificationView, IndexView
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    url(r'^$', IndexView.as_view(), name="index"),
-
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^login/$', LoginView.as_view(), name="login"),
-    url(r'^captcha/', include('captcha.urls')),
+    url(r'^captcha/',include('captcha.urls')),
 
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name="user_active"),
     url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name="reset_pwd"),
@@ -38,7 +36,5 @@ urlpatterns = [
     url(r'^classification/$', TemplateView.as_view(template_name="classification.html"), name="classification"),
 
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
-
-    url(r'^classification/$', ClassificationView.as_view, name="classification"),
 
 ]
