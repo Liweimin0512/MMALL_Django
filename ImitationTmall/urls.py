@@ -1,3 +1,4 @@
+# _*_encoding:utf8_*_
 """ImitationTmall URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -39,6 +40,7 @@ urlpatterns = [
 
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
 
-    url(r'^classification/$', ClassificationView.as_view, name="classification"),
+    # 商品相关url
+    url(r'^product', include('product.urls'), name="product"),
 
 ]

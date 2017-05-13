@@ -111,8 +111,6 @@ class ModifyPwdView(View):
             return render(request, "password_reset.html", {"email": email}, {"modify_form": modify_form})
 
 
-
-
 class ForgetPwdView(View):
     def get(self, request):
         forget_form = ForgetForm()

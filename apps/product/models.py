@@ -10,8 +10,8 @@ from users.models import UserProfile
 # Create your models here.
 
 
-#商品分类
 class Category(models.Model):
+    # 商品分类
     name = models.CharField(max_length=200, verbose_name=u"分类名")
 
     class Meta:
@@ -21,11 +21,17 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_products(self):
+        return self.product_set.all()
 
-#属性
+    def get_property(self):
+        return self.property_set.all()
+
+
 class Property(models.Model):
+    # 属性
     name = models.CharField(max_length=200, verbose_name=u"属性")
-    Category = models.ForeignKey(Category, verbose_name=u"分类")
+    category = models.ForeignKey(Category, verbose_name=u"分类")
 
     class Meta:
         verbose_name = u"属性"
@@ -34,16 +40,20 @@ class Property(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_property_value(self):
+        return self.propertyvalue_set.all()
+
 
 class Product(models.Model):
     # 产品表
-    name = models.CharField(max_length=200,verbose_name=u"产品")
-    subTitle = models.CharField(max_length=500,verbose_name=u"小标题")
+    name = models.CharField(max_length=200, verbose_name=u"产品")
+    subTitle = models.CharField(max_length=500, verbose_name=u"小标题")
     orignalPrice = models.FloatField(verbose_name=u"原始价格")
     promoteprice = models.FloatField(verbose_name=u"优惠价格")
     stock = models.FloatField(verbose_name=u"库存")
-    createData = models.DateTimeField(verbose_name=u"创建时间",default=datetime.now)
-    Category = models.ForeignKey(Category, verbose_name=u"分类")
+    createDate = models.DateTimeField(verbose_name=u"创建时间", default=datetime.now)
+    category = models.ForeignKey(Category, verbose_name=u"分类")
+    saleCount = models.IntegerField(verbose_name=u"销售数量")
 
     class Meta:
         verbose_name = u"产品表"
@@ -52,12 +62,21 @@ class Product(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_product_image(self):
+        return self.productimage_set.all()
+
+    def get_property_value(self):
+        return self.propertyvalue_set.all()
+
+    def get_review(self):
+        return self.review_set.all()
+
 
 class PropertyValue(models.Model):
     # 属性值
     value = models.CharField(max_length=200, verbose_name=u"属性值")
     property = models.ForeignKey(Property, verbose_name=u"属性名")
-    Product = models.ForeignKey(Product, verbose_name=u"所属商品")
+    product = models.ForeignKey(Product, verbose_name=u"所属商品")
 
     class Meta:
         verbose_name = u"属性值"
@@ -70,21 +89,22 @@ class PropertyValue(models.Model):
 class ProductImage(models.Model):
     # 产品图片，包括标题图和详情图
     type = models.CharField(choices=(("type_single", u"标题"), ("type_detail", u"详情")), max_length=100, verbose_name= u"图片类型")
-    Product = models.ForeignKey(Product, verbose_name=u"所属商品")
+    product = models.ForeignKey(Product, verbose_name=u"所属商品")
+    image = models.ImageField(upload_to="produceImage/%Y/%m", default=u"image/default.png", max_length=100)
 
     class Meta:
         verbose_name = u"产品图片"
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
-        return self.type
+        return self.product.name
 
 
 class Review(models.Model):
     # 产品评价
     content = models.TextField(verbose_name=u"评价内容")
     createDate = models.DateTimeField(verbose_name=u"创建时间")
-    Product = models.ForeignKey(Product, verbose_name=u"所属商品")
+    product = models.ForeignKey(Product, verbose_name=u"所属商品")
     user = models.ForeignKey(UserProfile, verbose_name=u"所属用户")
 
     class Meta:
@@ -92,4 +112,5 @@ class Review(models.Model):
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
-        return self.name
+        return self.content
+
