@@ -8,8 +8,15 @@ from .models import Category, Product, ProductSingleImage, ProductDetailImage
 
 
 class ClassificationView(View):
-    def get(self, request):
-        return render(request, "classification.html")
+    # 分类页面
+    def get(self, request, class_id):
+        # 取出对应id的分类
+        class_item = Category.objects.filter(id=int(class_id))
+        all_product = Product.objects.filter(category_id=int(class_id))
+
+        return render(request, "classification.html", {
+            "all_product": all_product
+        })
 
 
 class IndexView(View):
@@ -29,7 +36,10 @@ class IndexView(View):
 
 
 class ItemView(View):
-    def get(self, request):
+    # 商品页面
+    def get(self, request, item_id):
+        item_page = 'item'
+        item_org = Product.objects.filter(id=int(item_id))
         item = Product.objects.filter(id="733")
         return render(request, "item.html", {
             "item": item,

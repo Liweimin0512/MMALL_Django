@@ -35,207 +35,32 @@
 </div>
 
 <div class="categoryProducts">
-
-		<div class="productUnit" price="799.2">
+    {% for product in all_product %}
+    <div class="productUnit" price="{{ product.promoteprice }}">
 			<div class="productUnitFrame">
 				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7058.jpg">
+					<img class="productImage" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}">
 				</a>
-				<span class="productPrice">¥799.20</span>
+				<span class="productPrice">¥{{ product.promoteprice }}</span>
 				<a class="productLink" href="#nowhere">
-				 MAXFEEL休闲男士手包真皮手拿包大容量信封包手抓包夹包软韩版潮
+				 {{ product.name }}
 				</a>
 
 				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
 
 				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">16笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">14</span></span>
+					<span class="monthDeal ">月成交 <span class="productDealNumber">{{ product.saleCount }}笔</span></span>
+					<span class="productReview">评价<span class="productReviewNumber">{{ product.get_review.count }}</span></span>
 					<span class="wangwang">
 					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
+						<img src="{% static 'img/site/wangwang.png' %}">
 					</a>
 
 					</span>
 				</div>
 			</div>
 		</div>
-
-		<div class="productUnit" price="511.2">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7047.jpg">
-				</a>
-				<span class="productPrice">¥511.20</span>
-				<a class="productLink" href="#nowhere">
-				 宾度 男士手包真皮大容量手拿包牛皮个性潮男包手抓包软皮信封包
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">49笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">18</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="448.2">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7036.jpg">
-				</a>
-				<span class="productPrice">¥448.20</span>
-				<a class="productLink" href="#nowhere">
-				 唯美诺新款男士手包男包真皮大容量小羊皮手拿包信封包软皮夹包潮
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">34笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">16</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="411.6">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7025.jpg">
-				</a>
-				<span class="productPrice">¥411.60</span>
-				<a class="productLink" href="#nowhere">
-				 英伦邦纹男士手包牛皮大容量真皮手拿包手抓包双拉链商务正品软皮
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">25笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">19</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="157.25">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7014.jpg">
-				</a>
-				<span class="productPrice">¥157.25</span>
-				<a class="productLink" href="#nowhere">
-				 劳迪莱斯男士手包休闲手拿包牛皮大容量钱包男包软面小包包手抓包
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">19笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">16</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="268.2">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/7003.jpg">
-				</a>
-				<span class="productPrice">¥268.20</span>
-				<a class="productLink" href="#nowhere">
-				 帕朗尼男士手拿包真皮手包商务休闲头层牛皮软牛皮大容量休闲钱包
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">5笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">19</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="233.4">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/6992.jpg">
-				</a>
-				<span class="productPrice">¥233.40</span>
-				<a class="productLink" href="#nowhere">
-				 编织手包手拿包男信封大容量手抓包真皮韩版潮商务休闲牛皮男包
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">8笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">19</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="productUnit" price="952.0">
-			<div class="productUnitFrame">
-				<a href="#nowhere">
-					<img class="productImage" src="../static/img/productSingle_middle/6981.jpg">
-				</a>
-				<span class="productPrice">¥952.00</span>
-				<a class="productLink" href="#nowhere">
-				 犟牛男士手包真皮手拿包头层牛皮商务大容量手抓包软皮夹包信封包
-				</a>
-
-				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
-
-				<div class="show1 productInfo">
-					<span class="monthDeal ">月成交 <span class="productDealNumber">20笔</span></span>
-					<span class="productReview">评价<span class="productReviewNumber">16</span></span>
-					<span class="wangwang">
-					<a class="wangwanglink" href="#nowhere">
-						<img src="../static/img/site/wangwang.png">
-					</a>
-
-					</span>
-				</div>
-			</div>
-		</div>
-
+    {% endfor %}
 		<div style="clear:both"></div>
 </div>
 	</div>
@@ -243,60 +68,6 @@
 </div>
 
 
-
-<div class="modal " id="loginModal" tabindex="-1" role="dialog" >
-	<div class="modal-dialog loginDivInProductPageModalDiv">
-	        <div class="modal-content">
-					<div class="loginDivInProductPage">
-						<div class="loginErrorMessageDiv">
-							<div class="alert alert-danger" >
-							  <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-							  	<span class="errorMessage"></span>
-							</div>
-						</div>
-
-						<div class="login_acount_text">账户登录</div>
-						<div class="loginInput " >
-							<span class="loginInputIcon ">
-								<span class=" glyphicon glyphicon-user"></span>
-							</span>
-							<input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
-						</div>
-
-						<div class="loginInput " >
-							<span class="loginInputIcon ">
-								<span class=" glyphicon glyphicon-lock"></span>
-							</span>
-							<input id="password" name="password"  type="password" placeholder="密码" type="text">
-						</div>
-									<span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
-						<div>
-							<a href="#nowhere">忘记登录密码</a>
-							<a href="#nowhere" class="pull-right">免费注册</a>
-						</div>
-						<div style="margin-top:20px">
-							<button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
-						</div>
-					</div>
-	      </div>
-	</div>
-</div>
-
-<div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" >
-	<div class="modal-dialog deleteConfirmModalDiv">
-       <div class="modal-content">
-          <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">确认删除？</h4>
-          </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-            <button class="btn btn-primary deleteConfirmButton" id="submit" type="button">确认</button>
-          </div>
-        </div>
-      </div>
-	</div>
-</div>
 </section>
 
 {% endblock %}

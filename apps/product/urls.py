@@ -7,7 +7,9 @@ from django.conf.urls import url
 from .views import ClassificationView, ItemView
 
 urlpatterns = [
-    url(r'^ClassificationView/', ClassificationView.as_view, name='classification'),
+    # 分类详情界面
+    url(r'^classification/(?P<class_id>\d+)/$', ClassificationView.as_view(), name='classification'),
+    # url(r'^home/(?P<org_id>\d+)/$', OrgHomeView.as_view(), name='org_home'),
     url(r'item/$', ItemView.as_view(), name='item')
 
 ]

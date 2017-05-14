@@ -24,6 +24,9 @@ class Category(models.Model):
     def get_products(self):
         return self.product_set.all()
 
+    def get_products_by_row(self):
+        return [self.product_set.all()]
+
     def get_property(self):
         return self.property_set.all()
 
@@ -76,6 +79,9 @@ class Product(models.Model):
 
     def get_review(self):
         return self.review_set.all()
+
+    def get_subtitle(self):
+        return self.subTitle.split(" ")[0]
 
 
 class PropertyValue(models.Model):

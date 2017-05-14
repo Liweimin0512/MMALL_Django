@@ -39,7 +39,7 @@ urlpatterns = [
 
     url(r'^forget/$', ForgetPwdView.as_view, name="forget_pwd"),
 
-    url(r'^classification/$', TemplateView.as_view(template_name="classification.html"), name="classification"),
+    # url(r'^classification/$', TemplateView.as_view(template_name="classification.html"), name="classification"),
 
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
 
