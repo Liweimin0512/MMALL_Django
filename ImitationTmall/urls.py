@@ -22,31 +22,33 @@ import xadmin
 from django.views.static import serve #处理静态文件
 
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
-from product.views import ClassificationView, IndexView
+from product.views import IndexView
 from ImitationTmall.settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^$', IndexView.as_view(), name="index"),
 
+    # 注册登陆
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^login/$', LoginView.as_view(), name="login"),
-    url(r'^captcha/', include('captcha.urls')),
 
+    # 验证码相关
+    url(r'^captcha/', include('captcha.urls')),
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name="user_active"),
+    url(r'^forget/$', ForgetPwdView.as_view, name="forget_pwd"),
     url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name="reset_pwd"),
     url(r'^modify_pwd/$', ModifyPwdView.as_view, name="modify_pwd"),
 
-    url(r'^forget/$', ForgetPwdView.as_view, name="forget_pwd"),
-
-    # url(r'^classification/$', TemplateView.as_view(template_name="classification.html"), name="classification"),
-
+    # 模板页面测试
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
-
-    # 商品相关url
-    url(r'^product', include('product.urls', namespace="product")),
 
     # 配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
+    # 用户相关URL
+    url(r'^', include('users.urls', namespace="users")),
+
+    # 商品相关url
+    url(r'^product', include('product.urls', namespace="product")),
 ]

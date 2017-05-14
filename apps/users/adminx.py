@@ -1,4 +1,4 @@
-#_*_encoding:utf8_*_
+# _*_encoding:utf8_*_
 __author__ = 'hetao'
 __date__ = '2017/4/22 16:42'
 
@@ -19,10 +19,10 @@ class GlobalSettings(object):
 
 
 class EmailVerifyRecordAdmin(object):
-    list_display = ('code','email','send_type','send_time',)
-    search_fields = ('code','email','send_type',)
-    list_filter = ('code','email','send_type','send_time',)
-xadmin.sites.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)
+    list_display = ('code', 'email', 'send_type', 'send_time',)
+    search_fields = ('code', 'email', 'send_type',)
+    list_filter = ('code', 'email','send_type', 'send_time',)
+xadmin.sites.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 
 
 class UserProfileAdmin(object):
@@ -31,5 +31,5 @@ class UserProfileAdmin(object):
     list_filter = ('nick_name', 'birday', 'gender', 'address', 'mobile', 'image')
 xadmin.site.register(UserProfile, UserProfileAdmin)
 
-xadmin.site.register(views.BaseAdminView,BaseSetting)
-xadmin.site.register(views.CommAdminView,GlobalSettings)
+xadmin.site.register(views.BaseAdminView, BaseSetting)
+xadmin.site.register(views.CommAdminView, GlobalSettings)

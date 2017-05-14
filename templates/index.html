@@ -9,6 +9,41 @@
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
+{% block searchBelow %}
+    {% for category in all_category %}
+        {% if forloop.counter <= 4 %}
+            <span>
+            <a href="{% url 'product:classification' category.id %}">{{ category.name }}</a>
+            <span>|</span>
+            </span>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+{% block searchBelow %}
+    <div class="searchOutDiv">
+        <a href="index.html">
+        <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
+    </a>
+        <form method="post" class="searchForm">
+        <div class="searchDiv">
+            <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
+            <button  type="button" class="searchButton">搜索</button>
+            <div class="searchBelow">
+                {% for category in all_category %}
+                {% if forloop.counter <= 4 %}
+                <span>
+                <a href="{% url 'product:classification' category.id %}">{{ category.name }}</a>
+                <span>|</span>
+                </span>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        </form>
+    </div>
+{% endblock %}
+
+
 {% block content %}
 <section class="body">
 <div class="homepageDiv">

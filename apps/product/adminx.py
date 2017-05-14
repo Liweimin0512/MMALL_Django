@@ -1,24 +1,32 @@
-#_*_coding:utf-8_*_
+# _*_coding:utf-8_*_
 __author__ = 'hetao'
 __date__ = '2017/4/22 17:43'
 
 import xadmin
 from .models import Product,ProductSingleImage,ProductDetailImage,PropertyValue,Property,Review,Category
 
+
 class ProductAdmin(object):
-    pass
+    list_display = ('name', 'subTitle', 'promoteprice', 'stock', 'createDate', 'saleCount')
+    search_fields = ('name', 'subTitle', 'promoteprice', 'stock', 'createDate', 'saleCount')
+    list_filter = ('name', 'subTitle', 'promoteprice', 'stock', 'createDate', 'saleCount')
+
 
 class CategoryAdmin(object):
     pass
 
+
 class PropertyAdmin(object):
     pass
+
 
 class PropertyValueAdmin(object):
     pass
 
+
 class ProductSingleImageAdmin(object):
     pass
+
 
 class ProductDetailImageAdmin(object):
     pass

@@ -21,6 +21,11 @@ nav.top span, nav.top a{
 nav.top a:hover{
     color: #C40000;
 }
+div.top_middle{
+    max-width: 1024px;
+    margin: 0px auto;
+}
+
 
 div.searchDiv{
     background-color: #C40000;
@@ -58,8 +63,8 @@ div.searchBelow a{
 }
 img.logo{
     position: absolute;
-    left: 0px;
-    top: 30px;
+    left: -40px;
+    top: -50px;
     z-index:-1;
 }
 body{
@@ -90,7 +95,8 @@ div.footer_desc{
     border-top-width: 1px;
     border-top-color: #e7e7e7;
     padding-top: 30px;
-    margin: 0px 20px;
+    margin: 0px auto;
+    max-width: 1024px;
 }
 div.footer_desc div.descColumn{
     width: 20%;
@@ -116,6 +122,11 @@ a{
 a:hover{
     text-decoration:none;
     color: #C40000;
+}
+div.searchOutDiv{
+    max-width: 1024px;
+    margin: 0px auto;
+    position: relative;
 }
 
 div.footer{
@@ -154,8 +165,23 @@ div.license div.copyRightYear{
 }
 img.cateye{
     margin-left: 20px;
+    display: block;
+    position: absolute;
+    top: -33px;
+    left: -15px;
 }
 body{
     font-size: 12px;
     font-family: Arial;
+}
+div.horizontal_line {
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #e7e7e7;
+}
+div.coptyrightMiddle {
+    width: 1024px;
+    margin: 0px auto;
+    text-align: left;
+    position: relative;
 }
