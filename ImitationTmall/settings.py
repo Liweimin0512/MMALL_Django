@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'ImitationTmall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "tmall",
+        'NAME': "imitationtmall",
         'USER': "root",
         'PASSWORD': "admin",
         'HOST': "127.0.0.1",

@@ -24,11 +24,23 @@ class Category(models.Model):
     def get_products(self):
         return self.product_set.all()
 
-    def get_products_by_row(self):
-        return [self.product_set.all()]
-
     def get_property(self):
         return self.property_set.all()
+
+    def get_product_by_row(self):
+        products = self.product_set.all()
+        product_num_each_row = 8
+        products_by_row = []
+        for i in range(0, len(products), product_num_each_row):
+            size = i + product_num_each_row
+            if size > products.count():
+                size = products.count()
+            else:
+                size = size
+            for j in range(i, size):
+                products_each_row = products[j]
+                products_by_row.append(products_each_row)
+        return products_by_row
 
 
 class Property(models.Model):
@@ -66,7 +78,8 @@ class Product(models.Model):
         return self.name
 
     def get_title_image(self):
-        return self.productsingleimage_set.all()[0]
+        if self.productsingleimage_set.all()[0] != None:
+            return self.productsingleimage_set.all()[0]
 
     def get_single_image(self):
         return self.productsingleimage_set.all()

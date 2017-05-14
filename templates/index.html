@@ -10,16 +10,6 @@
 {% endblock %}
 
 {% block searchBelow %}
-    {% for category in all_category %}
-        {% if forloop.counter <= 4 %}
-            <span>
-            <a href="{% url 'product:classification' category.id %}">{{ category.name }}</a>
-            <span>|</span>
-            </span>
-        {% endif %}
-    {% endfor %}
-{% endblock %}
-{% block searchBelow %}
     <div class="searchOutDiv">
         <a href="index.html">
         <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
@@ -101,9 +91,9 @@ $(function(){
 </script>
     {% for category in all_category %}
         <div cid="{{ category.id }}" class="productsAsideCategorys">
-            {% for products in category.get_products_by_row %}
+            {% for products in category.get_product_by_row %}
                 <div class="row show1">
-                    {% for product in products %}
+                    {% for product in category.get_products %}
                     <a href="#nowhere">
                         {{ product.get_subtitle }}
                     </a>
