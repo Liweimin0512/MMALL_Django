@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
 
     # 商品相关url
-    url(r'^product', include('product.urls'), name="product"),
+    url(r'^product', include('product.urls', namespace="product")),
 
     # 配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),

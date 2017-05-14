@@ -38,9 +38,8 @@ class IndexView(View):
 class ItemView(View):
     # 商品页面
     def get(self, request, item_id):
-        item_page = 'item'
-        item_org = Product.objects.filter(id=int(item_id))
-        item = Product.objects.filter(id="733")
+        # item_page = 'item'
+        item = Product.objects.get(id=int(item_id))
         return render(request, "item.html", {
-            "item": item,
+            "item": item
         })

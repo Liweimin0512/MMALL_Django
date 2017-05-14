@@ -30,7 +30,7 @@
         {% for category in all_category %}
             {% if forloop.counter <= 4 %}
                 <span>
-				<a href="#nowhere">
+				<a href="{% url 'product:classification' category.id %}">
 					{{ category.name }}
 				</a></span>
             {% endif %}
@@ -44,7 +44,7 @@
     {% for category in all_category %}
         <div cid="{{ category.id }}" class="eachCategory">
 				<span class="glyphicon glyphicon-link"></span>
-				<a href="#nowhere">
+				<a href="{% url 'product:classification' category.id %}">
 					{{ category.name }}
 				</a>
         </div>
@@ -135,8 +135,8 @@ $(function(){
                 {% for product in all_product %}
                     {% if product.category == category %}
                         <div class="productItem" >
-							<a href="#nowhere"><img width="100px" data-url="{{ MEDIA_URL }}{{ product.get_title_image.image }}" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}"></a>
-							<a class="productItemDescLink" href="#nowhere">
+							<a href="{% url 'product:item' product.id %}"><img width="100px" data-url="{{ MEDIA_URL }}{{ product.get_title_image.image }}" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}"></a>
+							<a class="productItemDescLink" href="{% url 'product:item' product.id %}">
 								<span class="productItemDesc">[热销]
 								{{ product.name|slice:"20" }}
 								</span>
