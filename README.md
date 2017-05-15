@@ -26,11 +26,8 @@ This Project is imitation Tmall website for using python based on the developmen
 + 写个总结报告
 
 ## 前端素材
-前端文件来源于这个网站：[HOW2J.CN](http://how2j.cn/)
-这是一个很不错的学习java web开发的网站。
-我直接把实战项目中的前端文件拿来用了。<d>只做了少量修改</d>
-现在看来，我已经将原型代码改的面目全非了。在这个过程中，我在学习django的模板
-项目开发数周，由于使用到django的模板，因此已经将原前端素材改的面目全非，为了实现某些功能甚至添加了新的页面。
+前端文件来源于此网站：[HOW2J.CN](http://how2j.cn/)（一个很不错的学习java web开发的网站，安利一发）
+项目开发过程中，由于使用了django模板template系统，因此已经将原文件改的有点儿面目全非了。<del>想到自己还没静下心真正学习前端技术呢。算是一次修炼吧。</del>
 用到了Bootstrap
 
 ## 脑图
