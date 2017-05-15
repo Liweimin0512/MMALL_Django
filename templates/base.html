@@ -6,11 +6,11 @@
 	<script src="{% static 'js/jquery/2.0.0/jquery.min.js' %}"></script>
 	<link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
 	<script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'js/public.js' %}"></script>
 	<title>{% block title %}基础模板{% endblock %}</title>
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
 </head>
 <body>
 {% block top %}
@@ -41,7 +41,6 @@
         </span>
         </div>
 	</nav>
-    {% block searchBelow %}
     <div class="searchOutDiv">
         <a href="index.html">
         <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
@@ -50,27 +49,19 @@
         <div class="searchDiv">
             <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
             <button  type="button" class="searchButton">搜索</button>
-            <div class="searchBelow">
+            <div class="searchBelow"> 
+                {% for category in all_category %}
+                {% if forloop.counter <= 4 %}
                 <span>
-                    <a href="#nowhere">平衡车</a>
-                    <span>|</span>
+                <a href="{% url 'product:classification' category.id %}">{{ category.name }}</a>
+                <span>|</span>
                 </span>
-                <span>
-                    <a href="#nowhere">扫地机器人</a>
-                    <span>|</span>
-                </span>
-                <span>
-                    <a href="#nowhere">原味机</a>
-                    <span>|</span>
-                </span>
-                <span>
-                    <a href="#nowhere">冰箱</a>
-                </span>
+                {% endif %}
+                {% endfor %} 
             </div>
         </div>
     </form>
     </div>
-    {% endblock %}
 </section>
 {% endblock %}
 
