@@ -21,7 +21,7 @@ import xadmin
 
 from django.views.static import serve #处理静态文件
 
-from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from product.views import IndexView
 from ImitationTmall.settings import MEDIA_ROOT
 
@@ -32,6 +32,9 @@ urlpatterns = [
     # 注册登陆
     url(r'^register/$', RegisterView.as_view(), name="register"),
     url(r'^login/$', LoginView.as_view(), name="login"),
+
+    # 退出登录
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
 
     # 验证码相关
     url(r'^captcha/', include('captcha.urls')),

@@ -23,10 +23,10 @@
             </a>
 
             {% if request.user.is_authenticated %}
-            <a href="/signIn/">Hi,{{ request.user.username }}</a>
+            <a href="/login/">Hi,{{ request.user.username }}</a>
             <a href="#nowhere">积分</a>
             <a href="#nowhere">消息</a>
-            <a href="#nowhere">退出</a>
+            <a href="/logout/">退出</a>
             {% else %}
             <span>喵，欢迎来天猫</span>
             <a href="{% url 'login' %}">请登录</a>

@@ -1,10 +1,12 @@
 # _*_ encoding:utf-8 _*_
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponsePermanentRedirect, HttpRequest
+from django.core.urlresolvers import reverse
 
 from .models import UserProfile, EmailVerifyRecord
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm
@@ -126,3 +128,8 @@ class ForgetPwdView(View):
             return render(request, "forgetpwd.html", {'forget_form': forget_form})
 
 
+class LogoutView(View):
+    # 用户登出
+    def get(self, request):
+        logout(request)
+        return HttpResponsePermanentRedirect(reverse('index'))
