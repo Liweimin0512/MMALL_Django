@@ -17,7 +17,7 @@
 <section class="top">
 	<nav class="top">
         <div class="top_middle">
-            <a href="index.html">
+            <a href="{% url 'index' %}">
             <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
             天猫首页
             </a>
@@ -26,7 +26,7 @@
             <a href="/login/">Hi,{{ request.user.username }}</a>
             <a href="#nowhere">积分</a>
             <a href="#nowhere">消息</a>
-            <a href="/logout/">退出</a>
+            <a href="{% url 'logout' %}">退出</a>
             {% else %}
             <span>喵，欢迎来天猫</span>
             <a href="{% url 'login' %}">请登录</a>

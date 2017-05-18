@@ -39,9 +39,9 @@ urlpatterns = [
     # 验证码相关
     url(r'^captcha/', include('captcha.urls')),
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name="user_active"),
-    url(r'^forget/$', ForgetPwdView.as_view, name="forget_pwd"),
-    url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name="reset_pwd"),
-    url(r'^modify_pwd/$', ModifyPwdView.as_view, name="modify_pwd"),
+    url(r'^forget/$', ForgetPwdView.as_view(), name="forget_pwd"),
+    url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name="reset_pwd"),  # 修改密码
+    url(r'^modify_pwd/$', ModifyPwdView.as_view(), name="modify_pwd"),  # 修改密码,没有参数防止报错
 
     # 模板页面测试
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
@@ -50,8 +50,12 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
     # 用户相关URL
-    url(r'^', include('users.urls', namespace="users")),
+    url(r'users/', include('users.urls', namespace="users")),
 
     # 商品相关url
     url(r'^product', include('product.urls', namespace="product")),
 ]
+
+# 全局 404 页面配置（django 会自动调用这个变量）
+handler404 = 'users.views.page_not_found'
+handler500 = 'users.views.page_error'

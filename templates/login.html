@@ -9,6 +9,10 @@
 {% block extra_js %}
     <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
 {% endblock %}
+
+{% block top %}
+{% endblock %}
+
 {% block content %}
 
     <section class="body">
@@ -19,12 +23,16 @@
 
 		<img id="loginBackgroundImg" class="loginBackgroundImg" src="{% static 'img/site/loginBackground.png' %}">
 
-		<form class="loginForm"  method="post">
+		<form class="loginForm"  method="post" action="{% url 'login' %}" autocomplete="off">
 			<div id="loginSmallDiv" class="loginSmallDiv">
 				<div class="loginErrorMessageDiv">
 					<div class="alert alert-danger" >
 				  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-				  		<span class="errorMessage"></span>
+				  		<span class="errorMessage">
+                            {% for key,error in login_form.errors.items %}
+				  		        {{ error }}
+				  		    {% endfor %}
+				  		</span>
 					</div>
 				</div>
 
@@ -41,20 +49,17 @@
 					</span>
 					<input id="password" name="password" type="password" placeholder="密码" type="text">
 				</div>
-				<span class="text-danger">{% for key,error in login_form.errors.items %}{{ key }}{{ "是必填项" }}{% endfor %}{{ msg }}</span><br><br>
-
+    			<span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
 				<div>
 					<a class="notImplementLink" href="{% url 'forget_pwd' %}">忘记登录密码</a>
-					<a href="{% url 'register' %}" class="pull-right">免费注册</a>
+					<a class="pull-right" href="{% url 'register' %}">免费注册</a>
 				</div>
 				<div style="margin-top:20px">
 					<button class="btn btn-block redButton" type="submit">登录</button>
 				</div>
 			</div>
             {% csrf_token %}
-
 		</form>
 	</div>
-
 </section>
 {% endblock %}
