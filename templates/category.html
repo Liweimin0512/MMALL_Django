@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}分类界面by维民{% endblock %}
+
+{% load staticfiles %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/classification.css' %}">
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/classification.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section class="body">
+
+<div class="categorySortBar">
+
+	<table class="categorySortBarTable categorySortTable">
+		<tr>
+			<td class="grayColumn"><a href="?sort=alls">综合<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+			<td><a href="?sort=review">人气<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+			<td><a href="?sort=date">新品<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+			<td><a href="?sort=sale_count">销量<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+			<td><a href="?sort=price">价格<span class="glyphicon glyphicon-resize-vertical"></span></a></td>
+		</tr>
+	</table>
+
+	<table class="categorySortBarTable">
+		<tr>
+			<td><input class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
+			<td class="grayColumn priceMiddleColumn">-</td>
+			<td><input class="sortBarPrice endPrice" type="text" placeholder="请输入"></td>
+		</tr>
+	</table>
+
+</div>
+
+<div class="categoryProducts">
+    {% for product in all_product %}
+    <div class="productUnit" price="{{ product.promoteprice }}">
+			<div class="productUnitFrame">
+				<a href="{% url 'product:item' product.id %}">
+					<img class="productImage" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}">
+				</a>
+				<span class="productPrice">¥{{ product.promoteprice }}</span>
+				<a class="productLink" href="{% url 'product:item' product.id %}">
+				 {{ product.name }}
+				</a>
+
+				<a  class="tmallLink" href="#nowhere">天猫专卖</a>
+
+				<div class="show1 productInfo">
+					<span class="monthDeal ">月成交 <span class="productDealNumber">{{ product.saleCount }}笔</span></span>
+					<span class="productReview">评价<span class="productReviewNumber">{{ product.get_review.count }}</span></span>
+					<span class="wangwang">
+					<a class="wangwanglink" href="#nowhere">
+						<img src="{% static 'img/site/wangwang.png' %}">
+					</a>
+
+					</span>
+				</div>
+			</div>
+		</div>
+    {% endfor %}
+		<div style="clear:both"></div>
+</div>
+	</div>
+
+</div>
+
+
+</section>
+
+{% endblock %}

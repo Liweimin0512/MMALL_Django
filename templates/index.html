@@ -30,7 +30,7 @@
         {% for category in all_category %}
             {% if forloop.counter <= 4 %}
                 <span>
-				<a href="{% url 'product:classification' category.id %}">
+				<a href="{% url 'product:category' category.id %}">
 					{{ category.name }}
 				</a></span>
             {% endif %}
@@ -44,7 +44,7 @@
     {% for category in all_category %}
         <div cid="{{ category.id }}" class="eachCategory">
 				<span class="glyphicon glyphicon-link"></span>
-				<a href="{% url 'product:classification' category.id %}">
+				<a href="{% url 'product:category' category.id %}">
 					{{ category.name }}
 				</a>
         </div>

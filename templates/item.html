@@ -274,6 +274,34 @@ $(function(){
         {% endfor %}
 	</div>
 
+    <!-- 分页器 -->
+    <div class="rate-page">
+        <div class="rate-patinator">
+            {% if all_review.has_previous %}
+                <a href="?{{ all_review.previous_page_number.querystring }}" class="prev">上一页</a>
+            {% else %}
+                <span class="disabled prev">上一页</span>
+            {% endif %}
+
+            {% for page in all_review.pages %}
+            {% if page %}
+                {% ifequal page all_review.number %}
+                    <span class="current page">{{ page }}</span>
+                {% else %}
+                    <a href="?{{ page.querystring }}" class="page">{{ page }}</a>
+                {% endifequal %}
+            {% else %}
+                ...
+            {% endif %}
+            {% endfor %}
+            {% if all_review.has_next %}
+            <a href="?{{ all_review.next_page_number.querystring }}" class="next">下一页</a>
+            {% else %}
+            <span class="disabled next">下一页</span>
+            {% endif %}
+        </div>
+        <div class="rate-chat"></div>
+    </div>
 </div>
 
 <div class="productDetailDiv" >

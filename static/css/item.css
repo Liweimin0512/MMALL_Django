@@ -2267,3 +2267,27 @@ table.cartProductTable th.selectAndImage{
 table td{
 	font-size:12px;	
 }
+
+/*关于分页器*/
+.rate-patinator{
+	clear: both;
+	height: 30px;
+	margin: 50px auto;
+	display: table;
+	text-align: center;
+}
+
+div.rate-page a, div.rate-page span {
+    display: inline-block;
+    vertical-align: top;
+    height: 27px;
+    line-height: 27px;
+    padding: 5px 14px;
+    border: 1px solid #e5e5e5;
+    border-width: 1px 1px 1px 0;
+    color: #2953a6;
+    font-size: 14px;
+}
+.rate-chat, .tm-more-rate-close {
+    display: none;
+}
