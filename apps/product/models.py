@@ -70,6 +70,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, verbose_name=u"分类")
     saleCount = models.IntegerField(verbose_name=u"销售数量")
 
+
     class Meta:
         verbose_name = u"产品表"
         verbose_name_plural = verbose_name
@@ -78,7 +79,7 @@ class Product(models.Model):
         return self.name
 
     def get_title_image(self):
-        if self.productsingleimage_set.all()[0] != None:
+        if self.productsingleimage_set.all()[0]:
             return self.productsingleimage_set.all()[0]
 
     def get_single_image(self):

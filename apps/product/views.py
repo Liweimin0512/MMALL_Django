@@ -15,18 +15,19 @@ class CategoryView(View):
         all_product = Product.objects.filter(category_id=int(class_id))
         # 获取参数sort
         sort = request.GET.get('sort', '')
+
         # 排序方法
         if sort:
             if sort =='review':
-                all_product.order_by("")  # 如何获取评论数量？
+                all_product = all_product.order_by("review")  # 如何获取评论数量？
             elif sort =='date':
-                all_product.order_by("createDate")
+                all_product = all_product.order_by("createDate")
             elif sort =='sale_count':
-                all_product.order_by("saleCount")
+                all_product = all_product.order_by("saleCount")
             elif sort =='price':
-                all_product.order_by("promoteprice")
+                all_product = all_product.order_by("promoteprice")
             elif sort =='alls':
-                all_product.order_by("id")
+                all_product = all_product.order_by("id")
 
         return render(request, "category.html", {
             "all_product": all_product,

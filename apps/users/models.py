@@ -41,3 +41,15 @@ class EmailVerifyRecord(models.Model):
 
     def __unicode__(self):
         return '{0}({1})'.format(self.code, self.email)
+
+
+class Banner(models.Model):
+    title = models.CharField(max_length=100, verbose_name=u"标题")
+    image = models.ImageField(upload_to='banner', verbose_name=u"轮播图", max_length=100)
+    url = models.URLField(max_length=200, verbose_name=u"访问地址")
+    index = models.IntegerField(default=100, verbose_name=u"顺序")
+    add_time = models.DateTimeField(default=datetime.now,verbose_name=u"添加时间")
+
+    class Meta:
+        verbose_name = u"轮播图"
+        verbose_name_plural = verbose_name
