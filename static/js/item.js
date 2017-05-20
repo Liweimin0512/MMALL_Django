@@ -79,4 +79,41 @@ $(function () {
         );
         return false;
     });
+
+    //加入购物车按钮监听
+    $(".addCartButton").removeAttr("disabled");
+    $(".addCartLink").click(function(){
+        var page = MyViewVar.page;
+        $.get(
+                page,
+                function(){
+                    if(MyViewVar.is_login){
+                        var pid = MyViewVar.pid;
+                        var num= $(".productNumberSetting").val();
+                        var addCartpage = "foreaddCart";
+                        $.get(
+                                addCartpage,
+                                {"pid":pid,"num":num},
+                                function(){
+                                    if(MyViewVar.is_login){
+                                        $(".addCartButton").html("已加入购物车");
+                                        $(".addCartButton").attr("disabled","disabled");
+                                        $(".addCartButton").css("background-color","lightgray")
+                                        $(".addCartButton").css("border-color","lightgray")
+                                        $(".addCartButton").css("color","black")
+
+                                    }
+                                    else{
+
+                                    }
+                                }
+                        );
+                    }
+                    else{
+                        $("#loginModal").modal('show');
+                    }
+                }
+        );
+        return false;
+    });
 });

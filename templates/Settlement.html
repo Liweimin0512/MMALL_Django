@@ -11,21 +11,19 @@
 {% block content %}
 <section class="buyPageDiv">
     <div class="buyPageDiv">
-  <form  method="post">
+  <form  method="post" action="{% url 'operation:settlement' %}" autocomplete="off" class="buyForm">
 
 	<div class="buyFlow">
-		<img class="pull-left" src="../static/img/site/simpleLogo.png">
-		<img class="pull-right" src="../static/img/site/buyflow.png">
+		<img class="pull-left" src="{% static 'img/site/simpleLogo.png' %}">
+		<img class="pull-right" src="{% static 'img/site/buyflow.png' %}">
 		<div style="clear:both"></div>
 	</div>
 	<div class="address">
 		<div class="addressTip">输入收货地址</div>
 		<div>
-
 			<table class="addressTable">
 				<tr>
 					<td class="firstColumn">详细地址<span class="redStar">*</span></td>
-
 					<td><textarea name="address" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌好吗，楼层和房间号等信息"></textarea></td>
 				</tr>
 				<tr>
@@ -138,8 +136,9 @@
 	</div>
 
 	<div class="submitOrderDiv">
-			<button type="button" class="submitOrderButton">提交订单</button>
+			<button type="submit" class="submitOrderButton">提交订单</button>
 	</div>
+  {% csrf_token %}
   </form>
 </div>
 </section>

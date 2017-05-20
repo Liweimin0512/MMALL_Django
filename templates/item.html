@@ -15,6 +15,7 @@
             is_login:false,
         {% endif %}
         page:"{% url 'product:item' item.id %}",
+        pid: {{ item.id }},
     };
 </script>
 <script type="text/javascript" src="{% static 'js/item.js' %}"></script>
@@ -116,7 +117,7 @@
 		</div>
 
 		<div class="buyDiv">
-			<a class="buyLink" href="{% url 'settlement' %}?pid={{ item.id }}">
+			<a class="buyLink" href="{% url 'operation:settlement' %}?pid={{ item.id }}">
                 <button class="buyButton">立即购买</button>
             </a>
 			<a href="#nowhere" class="addCartLink">

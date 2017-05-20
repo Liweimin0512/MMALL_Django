@@ -46,6 +46,7 @@ urlpatterns = [
 
     # 模板页面测试
     url(r'^base/$', TemplateView.as_view(template_name="base.html"), name="base"),
+    url(r'^base02/$', TemplateView.as_view(template_name="base02.html"), name="base02"),
 
     # 配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
@@ -56,8 +57,9 @@ urlpatterns = [
     # 商品相关url
     url(r'^product', include('product.urls', namespace="product")),
 
-    # 结算页面
-    url(r'^settlement/$', ForeProductView.as_view(), name="settlement")
+    # 订单相关url
+    url(r'^operation', include('operation.urls', namespace="operation")),
+
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）
