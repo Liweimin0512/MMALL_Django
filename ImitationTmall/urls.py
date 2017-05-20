@@ -57,7 +57,7 @@ urlpatterns = [
     url(r'^product', include('product.urls', namespace="product")),
 
     # 结算页面
-    url(r'^forebuy/(?P<item_id>.*)$', ForeProductView.as_view(), name="fore_product")
+    url(r'^settlement/$', ForeProductView.as_view(), name="settlement")
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）

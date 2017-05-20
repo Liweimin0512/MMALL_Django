@@ -22,9 +22,9 @@ $(function () {
 			};
 		});
 	}
-);
+    );
 	//修改购买数量
-	var stock = 3;
+	var stock = MyViewVar.stock;
     $(".productNumberSetting").keyup(function(){
         var num= $(".productNumberSetting").val();
         num = parseInt(num);
@@ -51,6 +51,7 @@ $(function () {
             num=1;
         $(".productNumberSetting").val(num);
     });
+
 	//切换商品详情和累计评价效果
 	$("div.productReviewDiv").hide();
     $("a.productDetailTopReviewLink").click(function(){
@@ -61,4 +62,21 @@ $(function () {
         $("div.productReviewDiv").hide();
         $("div.productDetailDiv").show();
     });
-})
+
+    //监听购买按钮
+    $(".buyLink").click(function(){
+        var page = MyViewVar.page;
+        $.get(
+                page,
+                function(){
+                    if (MyViewVar.is_login) {
+                        var num = $(".productNumberSetting").val();
+                        location.href = $(".buyLink").attr("href") + "&num=" + num;
+                    } else {
+                        $("#loginModal").modal('show');
+                    }
+                }
+        );
+        return false;
+    });
+});

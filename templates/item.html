@@ -6,6 +6,17 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/item.css' %}">
 {% endblock %}
 {% block extra_js %}
+<script>
+    var MyViewVar = {
+        stock: {{ item.stock }},
+        {% if request.user.is_authenticated %}
+            is_login:true,
+        {% else %}
+            is_login:false,
+        {% endif %}
+        page:"{% url 'product:item' item.id %}",
+    };
+</script>
 <script type="text/javascript" src="{% static 'js/item.js' %}"></script>
 {% endblock %}
 
@@ -105,10 +116,8 @@
 		</div>
 
 		<div class="buyDiv">
-			<a class="buyLink" href="{% url 'fore_product' item.id %}">
-                <button class="buyButton" data-toggle="model" data-target="loginModal">
-                    立即购买
-                </button>
+			<a class="buyLink" href="{% url 'settlement' %}?pid={{ item.id }}">
+                <button class="buyButton">立即购买</button>
             </a>
 			<a href="#nowhere" class="addCartLink">
                 <button class="addCartButton">
