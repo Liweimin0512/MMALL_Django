@@ -23,6 +23,7 @@ from django.views.static import serve #处理静态文件
 
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from product.views import IndexView
+from operation.views import ForeProductView
 from ImitationTmall.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -54,6 +55,9 @@ urlpatterns = [
 
     # 商品相关url
     url(r'^product', include('product.urls', namespace="product")),
+
+    # 结算页面
+    url(r'^forebuy/(?P<item_id>.*)$', ForeProductView.as_view(), name="fore_product")
 ]
 
 # 全局 404 页面配置（django 会自动调用这个变量）

@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/item.css' %}">
 {% endblock %}
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'js/public.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/item.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,139 +16,6 @@
 </div>
 
 <div class="productPageDiv">
-
-<script>
-
-$(function(){
-	var stock = 66;
-	$(".productNumberSetting").keyup(function(){
-		var num= $(".productNumberSetting").val();
-		num = parseInt(num);
-		if(isNaN(num))
-			num= 1;
-		if(num<=0)
-			num = 1;
-		if(num>stock)
-			num = stock;
-		$(".productNumberSetting").val(num);
-	});
-
-	$(".increaseNumber").click(function(){
-		var num= $(".productNumberSetting").val();
-		num++;
-		if(num>stock)
-			num = stock;
-		$(".productNumberSetting").val(num);
-	});
-	$(".decreaseNumber").click(function(){
-		var num= $(".productNumberSetting").val();
-		--num;
-		if(num<=0)
-			num=1;
-		$(".productNumberSetting").val(num);
-	});
-
-	$(".addCartLink").click(function(){
-		var page = "forecheckLogin";
-		if(false)$.get(
-	            page,
-	            function(result){
-	            	if("success"==result){
-	            		var pid = 819;
-	            		var num= $(".productNumberSetting").val();
-	            		var addCartpage = "foreaddCart";
-	            		if(false)$.get(
-	            				addCartpage,
-	            	            {"pid":pid,"num":num},
-	            	            function(result){
-	            	            	if("success"==result){
-	            	            		$(".addCartButton").html("已加入购物车");
-	            	            		$(".addCartButton").attr("disabled","disabled");
-	            	            		$(".addCartButton").css("background-color","lightgray")
-	            	            		$(".addCartButton").css("border-color","lightgray")
-	            	            		$(".addCartButton").css("color","black")
-
-	            	            	}
-	            	            	else{
-
-	            	            	}
-	            	            }
-	            		);
-	            	}
-	            	else{
-						$("#loginModal").modal('hide');
-	            	}
-	            }
-		);
-		return false;
-	});
-	$(".buyLink").click(function(){
-		var page = "forecheckLogin";
-		if(false)$.get(
-	            page,
-	            function(result){
-	            	if("success"==result){
-	            		var num = $(".productNumberSetting").val();
-	            		location.href= $(".buyLink").attr("href")+"&num="+num;
-	            	}
-	            	else{
-						$("#loginModal").modal('hide');
-	            	}
-	            }
-		);
-		return false;
-	});
-
-	$("button.loginSubmitButton").click(function(){
-		var name = $("#name").val();
-		var password = $("#password").val();
-
-		if(0==name.length||0==password.length){
-			$("span.errorMessage").html("请输入账号密码");
-			$("div.loginErrorMessageDiv").show();
-			return false;
-		}
-
-		var page = "foreloginAjax";
-		if(false)$.get(
-	            page,
-	            {"name":name,"password":password},
-	            function(result){
-	            	if("success"==result){
-	            		location.reload();
-	            	}
-	            	else{
-	            		$("span.errorMessage").html("账号密码错误");
-	            		$("div.loginErrorMessageDiv").show();
-	            	}
-	            }
-		);
-
-		return true;
-	});
-
-	$("img.smallImage").mouseenter(function(){
-		var bigImageURL = $(this).attr("bigImageURL");
-        $("img.bigImg").attr("src",bigImageURL);
-	});
-
-	$("img.bigImg").load(
-		function(){
-			$("img.smallImage").each(function(){
-				var bigImageURL = $(this).attr("bigImageURL");
-				img = new Image();
-				img.src = bigImageURL;
-
-				img.onload = function(){
-					console.log(bigImageURL);
-					$("div.img4load").append($(img));
-				};
-			});
-		}
-	);
-});
-
-</script>
 
 <div class="imgAndInfo">
 
@@ -238,8 +105,17 @@ $(function(){
 		</div>
 
 		<div class="buyDiv">
-			<a class="buyLink" href="#nowhere"><button class="buyButton">立即购买</button></a>
-			<a href="#nowhere" class="addCartLink"><button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button></a>
+			<a class="buyLink" href="{% url 'fore_product' item.id %}">
+                <button class="buyButton" data-toggle="model" data-target="loginModal">
+                    立即购买
+                </button>
+            </a>
+			<a href="#nowhere" class="addCartLink">
+                <button class="addCartButton">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    加入购物车
+                </button>
+            </a>
 		</div>
 	</div>
 
@@ -329,4 +205,44 @@ $(function(){
 </div>
 </div>
 </section>
+{% endblock %}
+
+{% block modal %}
+    <div class="modal " id="loginModal" tabindex="-1" role="dialog" >
+    <div class="modal-dialog loginDivInProductPageModalDiv">
+            <div class="modal-content">
+                    <div class="loginDivInProductPage">
+                        <div class="loginErrorMessageDiv">
+                            <div class="alert alert-danger" >
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                <span class="errorMessage"></span>
+                            </div>
+                        </div>
+
+                        <div class="login_acount_text">账户登录</div>
+                        <div class="loginInput " >
+                            <span class="loginInputIcon ">
+                                <span class=" glyphicon glyphicon-user"></span>
+                            </span>
+                            <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
+                        </div>
+
+                        <div class="loginInput " >
+                            <span class="loginInputIcon ">
+                                <span class=" glyphicon glyphicon-lock"></span>
+                            </span>
+                            <input id="password" name="password"  type="password" placeholder="密码" type="text">
+                        </div>
+                                    <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
+                        <div>
+                            <a href="#nowhere">忘记登录密码</a>
+                            <a href="#nowhere" class="pull-right">免费注册</a>
+                        </div>
+                        <div style="margin-top:20px">
+                            <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
+                        </div>
+                    </div>
+          </div>
+    </div>
+    </div>
 {% endblock %}

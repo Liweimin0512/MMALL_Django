@@ -60,9 +60,6 @@ class ItemView(View):
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
             page = 1
-
-        objects = ['john', 'edward', 'josh', 'frank']
-
         # 对评论进行分页
         p = Paginator(all_review, 5, request=request)
 
