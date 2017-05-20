@@ -72,10 +72,10 @@
 			<tbody class="productListTableTbody">
             {% for order_item in all_order_item %}
                 <tr class="orderItemTR">
-						<td class="orderItemFirstTD"><img class="orderItemImg" src="{{ MEDIA_URL }}{{ item.get_title_image.image }}"></td>
+						<td class="orderItemFirstTD"><img class="orderItemImg" src="{{ MEDIA_URL }}{{ order_item.product.get_title_image.image }}"></td>
 						<td class="orderItemProductInfo">
 						<a  href="#nowhere" class="orderItemProductLink">
-							{{ item.name }}
+							{{ order_item.product.name }}
 						</a>
 
 							<img src="{% static 'img/site/creditcard.png' %}" title="支持信用卡支付">
@@ -85,15 +85,15 @@
 						</td>
 						<td>
 
-						<span class="orderItemProductPrice">{{ item.promoteprice }}</span>
+						<span class="orderItemProductPrice">{{ order_item.product.promoteprice }}</span>
 						</td>
 						<td>
 						<span class="orderItemProductNumber">{{ order_item.number }}</span>
 						</td>
 						<td><span class="orderItemUnitSum">
-						￥{% widthratio item.promoteprice 1 order_item.number %}
+						￥{% widthratio order_item.product.promoteprice 1 order_item.number %}
 						</span></td>
-
+            {% endfor %}
 						<td rowspan="5"  class="orderItemLastTD">
 						<label class="orderItemDeliveryLabel">
 							<input type="radio" value="" checked="checked">
@@ -107,7 +107,7 @@
 						</td>
 
 					</tr>
-            {% endfor %}
+
 			</tbody>
 
 		</table>

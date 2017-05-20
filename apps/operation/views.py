@@ -13,16 +13,30 @@ class ForeProductView(View):
         item_id = request.GET.get("pid", "")
         num = request.GET.get("num", "")
         item = Product.objects.get(id=item_id)
-        user = request.user
+        user_id = request.user.id
 
-        oi = OrderItem()
-        oi.number = num
-        oi.product_id = item_id
-        oi.user_id = user
-        oi.order_id = -1
-        oi.save()
+        all_oi = OrderItem.objects.filter(order_id__isnull=True)
+        found = False
+        for oi in all_oi:
+            if oi.product.id == item.id:
+                oi.number = int(num) + oi.number
+                oi.save()
+                found = True
+
+        if (not found):
+            oi = OrderItem()
+            oi.number = num
+            oi.product_id = item_id
+            oi.user_id = user_id
+            oi.save()
+
+        all_order_item = OrderItem.objects.filter(order_id__isnull=True)
+        all_unit = 0
+        for oi in all_order_item:
+            unit = oi.product.promoteprice * oi.number
+            all_unit += unit
 
         return render(request, "Settlement.html", {
-            "item": item,
-            "order_item": oi,
+            "all_order_item": all_order_item,
+            "all_unit": all_unit,
         })

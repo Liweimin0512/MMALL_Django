@@ -22,7 +22,14 @@ class Order(models.Model):
     payDate = models.DateTimeField(verbose_name=u"支付日期", default=datetime.now)
     deliveryDate = models.DateTimeField(verbose_name=u"发货日期", default=datetime.now)
     confirmDate = models.DateTimeField(verbose_name=u"确认收货日期", default=datetime.now)
-    status = models.CharField(max_length=100, verbose_name=u"订单状态")
+    status = models.CharField(choices=(("waitPay", u"等待支付"),
+                                       ("waitDelivery", u"等待发货"),
+                                       ("waitConfirm", u"等待收货"),
+                                       ("waitReview", u"等待评价"),
+                                       ("finish", u"交易完成"),
+                                       ("delete", u"订单删除"),
+                                       ), default="waitPay",
+                              max_length=100, verbose_name=u"订单状态")
     user = models.ForeignKey(UserProfile, verbose_name=u"用户")
 
     class Meta:
@@ -33,7 +40,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     number = models.IntegerField(verbose_name=u"购买数量")
     product = models.ForeignKey(Product, verbose_name=u"产品")
-    order = models.ForeignKey(Order, verbose_name="订单") # 没有订单时为-1
+    order = models.ForeignKey(Order, verbose_name="订单", null=True, blank=True) # 没有订单时为-1
     user = models.ForeignKey(UserProfile, verbose_name="用户")
 
     class Meta:
