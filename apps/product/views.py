@@ -29,7 +29,7 @@ class CategoryView(View):
             elif sort =='alls':
                 all_product = all_product.order_by("id")
 
-        return render(request, "category.html", {
+        return render(request, "product_category.html", {
             "all_product": all_product,
             "sort": sort,
         })
@@ -65,7 +65,7 @@ class ItemView(View):
 
         reviews = p.page(page)
 
-        return render(request, "item.html", {
+        return render(request, "product_item.html", {
             "item": item,
             "all_review": reviews,
         })

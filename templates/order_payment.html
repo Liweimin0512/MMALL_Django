@@ -26,7 +26,7 @@
 	</div>
 
 	<div>
-		<a href="#nowhere"><button class="confirmPay">确认支付</button></a>
+		<a href="{% url 'operation:payedSuccess' %}?oid={{ order.id }}"><button class="confirmPay">确认支付</button></a>
 	</div>
 
 </div>

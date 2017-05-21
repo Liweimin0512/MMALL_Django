@@ -14,7 +14,8 @@
         {% else %}
             is_login:false,
         {% endif %}
-        page:"{% url 'product:item' item.id %}",
+        foreBoughtPage:"{% url 'product:item' item.id %}",
+        foreAddCartPage:"{% url 'operation:addCart' %}",
         pid: {{ item.id }},
     };
 </script>
@@ -120,7 +121,7 @@
 			<a class="buyLink" href="{% url 'operation:settlement' %}?pid={{ item.id }}">
                 <button class="buyButton">立即购买</button>
             </a>
-			<a href="#nowhere" class="addCartLink">
+			<a class="addCartLink" href="{% url 'operation:addCart' %}?pid={{ item.id }}">
                 <button class="addCartButton">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                     加入购物车

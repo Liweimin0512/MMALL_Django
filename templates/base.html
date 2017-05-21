@@ -9,6 +9,12 @@
 	<title>{% block title %}基础模板{% endblock %}</title>
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
+    <script>
+        var baseVar = {
+            cartSelected:"{% static 'img/site/cartSelected.png' %}",
+            cartNotSelected:"{% static 'img/site/cartNotSelected.png' %}",
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
 </head>
@@ -35,7 +41,7 @@
 
         <span class="pull-right">
             <a href="{% url 'operation:myOrder' %}">我的订单</a>
-            <a href="#nowhere">
+            <a href="{% url 'operation:foreCat' %}">
             <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
             购物车<strong>0</strong>件</a>
         </span>

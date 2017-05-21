@@ -36,6 +36,12 @@ class Order(models.Model):
         verbose_name = u"订单"
         verbose_name_plural = verbose_name
 
+    def get_order_item(self):
+        return self.orderitem_set.all()
+
+    def get_order_count(self):
+        return self.orderitem_set.all().count()
+
 
 class OrderItem(models.Model):
     number = models.IntegerField(verbose_name=u"购买数量")

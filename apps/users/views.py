@@ -27,7 +27,7 @@ class CustomBackend(ModelBackend):
 # 用户登陆逻辑
 class LoginView(View):
     def get(self, request):
-        return render(request, "login.html", {})
+        return render(request, "user_login.html", {})
 
     def post(self, request):
         login_form = LoginForm(request.POST)
@@ -40,11 +40,11 @@ class LoginView(View):
                     login(request, user)
                     return render(request, "index.html")
                 else:
-                    return render(request, "login.html", {"msg": "邮箱未激活"})
+                    return render(request, "user_login.html", {"msg": "邮箱未激活"})
             else:
-                return render(request, "login.html", {"msg": "用户名或密码错误"})
+                return render(request, "user_login.html", {"msg": "用户名或密码错误"})
         else:
-            return render(request, "login.html", {"login_form": login_form})
+            return render(request, "user_login.html", {"login_form": login_form})
 
 
 # 用户登出
@@ -59,7 +59,7 @@ class LogoutView(View):
 class RegisterView(View):
     def get(self, request):
         register_form = RegisterForm()
-        return render(request, "register.html", {'register_form': register_form})
+        return render(request, "user_register.html", {'register_form': register_form})
 
     def post(self, request):
         register_form = RegisterForm(request.POST)
@@ -68,7 +68,7 @@ class RegisterView(View):
 
             if UserProfile.objects.filter(email=user_name):
                 # 验证用户名是否已经存在
-                return render(request, "register.html", {"register_form": register_form}, {"msg": "用户名已经存在"})
+                return render(request, "user_register.html", {"register_form": register_form}, {"msg": "用户名已经存在"})
 
             pass_word = request.POST.get("password", "")
             user_profile = UserProfile()
@@ -79,9 +79,9 @@ class RegisterView(View):
             user_profile.save()
 
             send_register_email(user_name, "register")
-            return render(request, "login.html")
+            return render(request, "user_login.html")
         else:
-            return render(request, "register.html", {"register_form": register_form})
+            return render(request, "user_register.html", {"register_form": register_form})
 
 
 class ActiveUserView(View):
@@ -95,24 +95,24 @@ class ActiveUserView(View):
                 user.is_active = True
                 user.save()
         else:
-            return render(request, "active_fail.html")
-        return render(request, "login.html")
+            return render(request, "email_active_fail.html")
+        return render(request, "user_login.html")
 
 
 # 忘记密码页面
 class ForgetPwdView(View):
     def get(self, request):
         forget_form = ForgetForm()
-        return render(request, "forgetpwd.html", {'forget_form': forget_form})
+        return render(request, "user_forgetpwd.html", {'forget_form': forget_form})
 
     def post(self, request):
         forget_form = ForgetForm(request.POST)
         if forget_form.is_valid():
             email = request.POST.get("email", "")
             send_register_email(email, "forget")
-            return render(request, "send_success.html")
+            return render(request, "email_send_success.html")
         else:
-            return render(request, "forgetpwd.html", {'forget_form': forget_form})
+            return render(request, "user_forgetpwd.html", {'forget_form': forget_form})
 
 
 # 重置密码页面
@@ -122,10 +122,10 @@ class ResetView(View):
         if all_records:
             for record in all_records:
                 email = record.email
-                return render(request, "password_reset.html", {"email": email})
+                return render(request, "user_password_reset.html", {"email": email})
         else:
-            return render(request, "active_fail.html")
-        return render(request, "login.html")
+            return render(request, "email_active_fail.html")
+        return render(request, "user_login.html")
 
 
 # 忘记密码（未登录时，修改密码）
@@ -137,11 +137,12 @@ class ModifyPwdView(View):
             pwd2 = request.POST.get("password1", "")
             email = request.POST.get("email", "")
             if pwd1 != pwd2:
-                return render(request, "password_reset.html", {"email": email}, {"msg": "密码不一致"})
+                return render(request, "user_password_reset.html", {"email": email}, {"msg": "密码不一致"})
             user = UserProfile.objects.get(email=email)
             user.password = make_password(pwd1)
             user.save()
-            return render(request, "login.html")
+            return render(request, "user_login.html")
         else:
             email = request.POST.get("email", "")
-            return render(request, "password_reset.html", {"email": email}, {"modify_form": modify_form})
+            return render(request, "user_password_reset.html", {"email": email}, {"modify_form": modify_form})
+

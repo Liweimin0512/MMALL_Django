@@ -65,7 +65,7 @@ $(function () {
 
     //监听购买按钮
     $(".buyLink").click(function(){
-        var page = MyViewVar.page;
+        var page = MyViewVar.foreBoughtPage;
         $.get(
                 page,
                 function(){
@@ -83,19 +83,19 @@ $(function () {
     //加入购物车按钮监听
     $(".addCartButton").removeAttr("disabled");
     $(".addCartLink").click(function(){
-        var page = MyViewVar.page;
+        var page = MyViewVar.foreBoughtPage;
         $.get(
                 page,
                 function(){
                     if(MyViewVar.is_login){
                         var pid = MyViewVar.pid;
                         var num= $(".productNumberSetting").val();
-                        var addCartpage = "foreaddCart";
+                        var addCartpage = MyViewVar.foreAddCartPage;
                         $.get(
                                 addCartpage,
                                 {"pid":pid,"num":num},
-                                function(){
-                                    if(MyViewVar.is_login){
+                                function(ret){
+                                    if("success"==ret){
                                         $(".addCartButton").html("已加入购物车");
                                         $(".addCartButton").attr("disabled","disabled");
                                         $(".addCartButton").css("background-color","lightgray")
