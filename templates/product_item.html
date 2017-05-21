@@ -2,9 +2,6 @@
 {% block title %}商品页面by维民{% endblock %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/item.css' %}">
-{% endblock %}
 {% block extra_js %}
 <script>
     var MyViewVar = {
@@ -23,7 +20,6 @@
 {% endblock %}
 
 {% block content %}
-<section class="body">
 <div class="categoryPictureInProductPageDiv">
 	<img class="categoryPictureInProductPage" src="{% static 'img/category/68.jpg' %}">
 </div>
@@ -215,45 +211,4 @@
 	</div>
 </div>
 </div>
-</section>
-{% endblock %}
-
-{% block modal %}
-    <div class="modal " id="loginModal" tabindex="-1" role="dialog" >
-    <div class="modal-dialog loginDivInProductPageModalDiv">
-            <div class="modal-content">
-                    <div class="loginDivInProductPage">
-                        <div class="loginErrorMessageDiv">
-                            <div class="alert alert-danger" >
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                <span class="errorMessage"></span>
-                            </div>
-                        </div>
-
-                        <div class="login_acount_text">账户登录</div>
-                        <div class="loginInput " >
-                            <span class="loginInputIcon ">
-                                <span class=" glyphicon glyphicon-user"></span>
-                            </span>
-                            <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
-                        </div>
-
-                        <div class="loginInput " >
-                            <span class="loginInputIcon ">
-                                <span class=" glyphicon glyphicon-lock"></span>
-                            </span>
-                            <input id="password" name="password"  type="password" placeholder="密码" type="text">
-                        </div>
-                                    <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
-                        <div>
-                            <a href="#nowhere">忘记登录密码</a>
-                            <a href="#nowhere" class="pull-right">免费注册</a>
-                        </div>
-                        <div style="margin-top:20px">
-                            <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
-                        </div>
-                    </div>
-          </div>
-    </div>
-    </div>
 {% endblock %}

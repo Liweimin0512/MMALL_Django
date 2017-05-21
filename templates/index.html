@@ -2,15 +2,11 @@
 {% block title %}模仿天猫网站by维民{% endblock %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-{% endblock %}
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<section class="body">
 <div class="homepageDiv">
 <img src="{% static 'img/site/catear.png' %}" id="catear" class="catear"/>
 
@@ -123,9 +119,6 @@ $(function(){
 </div>
 
 </div>
-
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <div class="homepageCategoryProducts">
     {% for category in all_category %}
         <div class="eachHomepageCategoryProducts">
@@ -155,9 +148,5 @@ $(function(){
 
 </div>
 </div>
-
-</section>
-
-
 {% endblock %}
 

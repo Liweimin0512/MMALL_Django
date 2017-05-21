@@ -2,16 +2,12 @@
 {% block title %}分类界面by维民{% endblock %}
 
 {% load staticfiles %}
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/classification.css' %}">
-{% endblock %}
+
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/classification.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<section class="body">
-
 <div class="categorySortBar">
 
 	<table class="categorySortBarTable categorySortTable">
@@ -67,8 +63,4 @@
 	</div>
 
 </div>
-
-
-</section>
-
 {% endblock %}

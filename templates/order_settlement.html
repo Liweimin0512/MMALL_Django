@@ -2,15 +2,8 @@
 {% block title %}结算页面by维民{% endblock %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/Settlement.css' %}">
-{% endblock %}
-{% block extra_js %}
-
-{% endblock %}
 {% block content %}
-<section class="buyPageDiv">
-    <div class="buyPageDiv">
+<div class="buyPageDiv">
   <form  method="post" action="{% url 'operation:createOrder' %}" autocomplete="off" class="buyForm">
 
 	<div class="buyFlow">
@@ -141,5 +134,4 @@
   {% csrf_token %}
   </form>
 </div>
-</section>
 {% endblock %}

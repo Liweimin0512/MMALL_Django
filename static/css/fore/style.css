@@ -60,6 +60,10 @@ nav.top div.row div {
 	border: 1px solid gray;
 	text-align: center;
 }
+div.top_middle{
+	max-width: 1024px;
+	margin: 0px auto;
+}
 
 div.searchDiv {
 	background-color: #C40000;
@@ -85,6 +89,12 @@ div.searchDiv button {
 	color: white;
 	font-size: 20px;
 	font-weight: bold;
+}
+
+div.searchOutDiv{
+	max-width: 1024px;
+	margin: 0px auto;
+	position: relative;
 }
 
 div.categoryWithCarousel {
@@ -245,8 +255,8 @@ img.catear {
 
 img.logo {
 	position: absolute;
-	left: 0px;
-	top: 30px;
+	left: -40px;
+	top: -50px;
 /* 	z-index:-1; */
 }
 
@@ -341,11 +351,9 @@ div.footer_ensure {
 }
 
 div.footer_desc {
-	border-top-style: solid;
-	border-top-width: 1px;
-	border-top-color: #e7e7e7;
 	padding-top: 30px;
-	margin: 0px 20px;
+	margin: 0px auto;
+	max-width: 1024px;
 }
 
 div.footer div.copyright div.white_link a {
@@ -381,10 +389,22 @@ div.copyright {
 	border-top-width: 2px;
 	border-top-color: solid;
 	border-top-color: #C40000;
+	margin-top: 20px;
+}
+
+div.coptyrightMiddle {
+    width: 1024px;
+    margin: 0px auto;
+    text-align: left;
+    position: relative;
 }
 
 img.cateye {
 	margin-left: 20px;
+	display: block;
+    position: absolute;
+    top: -33px;
+    left: -15px;
 }
 
 div.copyright span.slash {
