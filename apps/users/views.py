@@ -38,7 +38,7 @@ class LoginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, "index.html")
+                    return HttpResponsePermanentRedirect(reverse('index'))
                 else:
                     return render(request, "user_login.html", {"msg": "邮箱未激活"})
             else:
@@ -47,12 +47,17 @@ class LoginView(View):
             return render(request, "user_login.html", {"login_form": login_form})
 
 
-# 用户登出
 class LogoutView(View):
-    # 用户登出
+    '''
+    用户登出
+    '''
     def get(self, request):
         logout(request)
-        return HttpResponsePermanentRedirect(reverse('index'))
+        # 重定向
+        return HttpResponsePermanentRedirect(reverse('login'))
+
+    def post(self, request):
+        pass
 
 
 # 注册功能

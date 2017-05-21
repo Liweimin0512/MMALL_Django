@@ -3,10 +3,10 @@
 {% load staticfiles %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% block title %}基础模板{% endblock %}</title>
 	<script src="{% static 'js/jquery/2.0.0/jquery.min.js' %}"></script>
 	<link href="{% static 'css/bootstrap/3.3.6/bootstrap.min.css' %}" rel="stylesheet">
 	<script src="{% static 'js/bootstrap/3.3.6/bootstrap.min.js' %}"></script>
-	<title>{% block title %}基础模板{% endblock %}</title>
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
     <script>
@@ -20,21 +20,18 @@
 </head>
 <body>
 {% block top %}
-<section class="top">
-	<nav class="top">
+<nav class="top">
         <div class="top_middle">
             <a href="{% url 'index' %}">
             <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
             天猫首页
             </a>
+            <span>喵，欢迎来天猫</span>
 
             {% if request.user.is_authenticated %}
-                <a href="{% url 'login' %}">Hi,{{ request.user.username }}</a>
-                <a href="#nowhere">积分</a>
-                <a href="#nowhere">消息</a>
+                <a href="{% url 'login' %}">{{ request.user.username }}</a>
                 <a href="{% url 'logout' %}">退出</a>
             {% else %}
-                <span>喵，欢迎来天猫</span>
                 <a href="{% url 'login' %}">请登录</a>
                 <a href="{% url 'register' %}">免费注册</a>
             {% endif %}
@@ -47,7 +44,9 @@
         </span>
         </div>
 	</nav>
-    <div class="searchOutDiv">
+{% endblock %}
+{% block search %}
+<div class="searchOutDiv">
         <a href="index.html">
         <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
     </a>
@@ -55,7 +54,7 @@
         <div class="searchDiv">
             <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
             <button  type="button" class="searchButton">搜索</button>
-            <div class="searchBelow"> 
+            <div class="searchBelow">
                 {% for category in all_category %}
                 {% if forloop.counter <= 4 %}
                 <span>
@@ -63,75 +62,69 @@
                 <span>|</span>
                 </span>
                 {% endif %}
-                {% endfor %} 
+                {% endfor %}
             </div>
         </div>
     </form>
     </div>
-</section>
 {% endblock %}
 
 {% block content %}
-<section class="body">
-	
-</section>
+
 {% endblock %}
 
 {% block modal %}
-<section class="modal">
-    <div class="modal " id="loginModal" tabindex="-1" role="dialog" >
-    <div class="modal-dialog loginDivInProductPageModalDiv">
-            <div class="modal-content">
-                    <div class="loginDivInProductPage">
-                        <div class="loginErrorMessageDiv">
-                            <div class="alert alert-danger" >
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                <span class="errorMessage"></span>
-                            </div>
-                        </div>
-
-                        <div class="login_acount_text">账户登录</div>
-                        <div class="loginInput " >
-                            <span class="loginInputIcon ">
-                                <span class=" glyphicon glyphicon-user"></span>
-                            </span>
-                            <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
-                        </div>
-
-                        <div class="loginInput " >
-                            <span class="loginInputIcon ">
-                                <span class=" glyphicon glyphicon-lock"></span>
-                            </span>
-                            <input id="password" name="password"  type="password" placeholder="密码" type="text">
-                        </div>
-                                    <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
-                        <div>
-                            <a href="#nowhere">忘记登录密码</a>
-                            <a href="#nowhere" class="pull-right">免费注册</a>
-                        </div>
-                        <div style="margin-top:20px">
-                            <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
+<div class="modal " id="loginModal" tabindex="-1" role="dialog" >
+<div class="modal-dialog loginDivInProductPageModalDiv">
+        <div class="modal-content">
+                <div class="loginDivInProductPage">
+                    <div class="loginErrorMessageDiv">
+                        <div class="alert alert-danger" >
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                            <span class="errorMessage"></span>
                         </div>
                     </div>
-          </div>
-    </div>
-    </div>
 
-    <div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" >
-    <div class="modal-dialog deleteConfirmModalDiv">
-       <div class="modal-content">
-          <div class="modal-header">
-            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">确认删除？</h4>
-          </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-            <button class="btn btn-primary deleteConfirmButton" id="submit" type="button">确认</button>
-          </div>
-        </div>
+                    <div class="login_acount_text">账户登录</div>
+                    <div class="loginInput " >
+                        <span class="loginInputIcon ">
+                            <span class=" glyphicon glyphicon-user"></span>
+                        </span>
+                        <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
+                    </div>
+
+                    <div class="loginInput " >
+                        <span class="loginInputIcon ">
+                            <span class=" glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input id="password" name="password"  type="password" placeholder="密码" type="text">
+                    </div>
+                                <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
+                    <div>
+                        <a href="#nowhere">忘记登录密码</a>
+                        <a href="#nowhere" class="pull-right">免费注册</a>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button class="btn btn-block redButton loginSubmitButton" type="button">登录</button>
+                    </div>
+                </div>
+      </div>
+</div>
+</div>
+<div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog" >
+<div class="modal-dialog deleteConfirmModalDiv">
+   <div class="modal-content">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">确认删除？</h4>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+        <button class="btn btn-primary deleteConfirmButton" id="submit" type="button">确认</button>
       </div>
     </div>
-</section>
+  </div>
+</div>
 {% endblock %}
 
 {% block footer %}

@@ -2,6 +2,12 @@
 	border: 1px dotted skyblue !important;
 }
 
+div.simpleSearchOutDiv{
+	max-width: 1024px;
+    margin: 0px auto;
+    position: relative;
+}
+
 body {
 	font-size: 12px;
 	font-family: Arial;

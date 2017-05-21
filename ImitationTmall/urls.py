@@ -15,7 +15,7 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
 import xadmin
 
@@ -23,7 +23,6 @@ from django.views.static import serve #处理静态文件
 
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 from product.views import IndexView
-from operation.views import ForeProductView
 from ImitationTmall.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -35,7 +34,7 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name="login"),
 
     # 退出登录
-    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^logout/$', LogoutView.as_view(), name="logout"),
 
     # 验证码相关
     url(r'^captcha/', include('captcha.urls')),

@@ -156,4 +156,15 @@ class MyOrderView(View):
             "orders": os,
         })
 
+
 # 评价页面
+class ReviewView(View):
+    def get(self, request):
+        item_id = request.GET.get("pid", "")
+        item = Product.objects.get(id=item_id)
+        return render(request, "order_review.html", {
+            "item": item,
+        })
+
+    def post(self, request):
+        pass

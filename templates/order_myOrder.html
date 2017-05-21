@@ -144,28 +144,34 @@ $(function(){
                             <div class="orderListItemProductRealPrice">￥{% widthratio order_item.number 1 order_item.product.promoteprice %}</div>
                             <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                         </td>
+                        {% ifequal order.status "waitReview" %}
+                            <td valign="middle" rowspan="1" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
+                                <a href="{% url 'operation:review' %}?pid={{ order_item.product.id }}">
+                                    <button  class="orderListItemReview">评价</button>
+                                </a>
+                            </td>
+                        {% endifequal %}
                 {% endfor %}
-                        <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
                             {% ifequal order.status "waitPay" %}
+                                <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
                                 <a href="#nowhere">
                                     <button  class="orderListItemConfirm">付款</button>
                                 </a>
+                                </td>
                             {% endifequal %}
                             {% ifequal order.status "waitDelivery" %}
+                                <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
                                 <span>待发货</span>
                                 <button class="btn btn-info btn-sm ask2delivery" link="admin_order_delivery?id=964">催卖家发货</button>
+                                </td>
                             {% endifequal %}
                             {% ifequal order.status "waitConfirm" %}
+                                <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
                                 <a href="#nowhere">
                                     <button  class="orderListItemConfirm">确认收货</button>
                                 </a>
+                                </td>
                             {% endifequal %}
-                            {% ifequal order.status "waitReview" %}
-                                <a href="#nowhere">
-                                    <button  class="orderListItemReview">评价</button>
-                                </a>
-                            {% endifequal %}
-                        </td  valign="middle"  valign="middle">
 					</tr>
 			</table>
         {% endfor %}
