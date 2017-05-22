@@ -95,6 +95,8 @@ class CreateOrderView(View):
         user_id = request.user
         if order_form.is_valid():
             order_ask = order_form.save(commit=False)
+            # time = datetime.datetime.now()
+            order_ask.orderCode = int(datetime.datetime.now().strftime('%y%m%d%H%M%S')) * 10000 + random.randint(0, 9999)
             # order_ask.status = "waitPay"
             order_ask.user = user_id
             order_ask.save()
@@ -158,8 +160,9 @@ class ReviewView(View):
         oi = OrderItem.objects.get(id=order_item_id)
         if review_form.is_valid():
             review_ask = review_form.save(commit=True)
+            oi.status = "finish"
+            oi.save()
             all_review = Review.objects.filter(product=review_ask.product)
-            # oi.
             return render(request, "order_review.html", {
                 "all_review": all_review,
                 "show_only": True,
