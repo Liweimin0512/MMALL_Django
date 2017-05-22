@@ -142,9 +142,9 @@ $(function(){
                             <div class="orderListItemProductRealPrice">￥{% widthratio order_item.number 1 order_item.product.promoteprice %}</div>
                             <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                         </td>
-                        {% ifequal order.status "waitReview" %}
+                        {% ifequal order_item.status "waitReview" %}
                             <td valign="middle" rowspan="1" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
-                                <a href="{% url 'operation:review' %}?pid={{ order_item.product.id }}">
+                                <a href="{% url 'operation:review' %}?oid={{ order_item.id }}">
                                     <button  class="orderListItemReview">评价</button>
                                 </a>
                             </td>

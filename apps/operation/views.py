@@ -2,13 +2,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.base import View
+# from django.utils import timezone
 
 import datetime
 import random
 
-from product.models import Product
+from product.models import Product, Review
 from .models import OrderItem, Order
-from .forms import OrderForm
+from .forms import OrderForm, ReviewForm
 # Create your views here.
 
 
@@ -79,49 +80,34 @@ class ForeCatView(View):
     def get(self, request):
         user = request.user
         ois = OrderItem.objects.filter(user_id=user.id, order_id__isnull=True)
+        oi_count = ois.count()
         return render(request, "user_forecart.html", {
-            "all_order_item": ois,
-
+            "all_cat_item": ois,
+            "all_cat_count": oi_count,
         })
 
 
 # 创建订单
 class CreateOrderView(View):
-    def get(self, request):
-        pass
-
     def post(self, request):
+        pass
         order_form = OrderForm(request.POST)
         user_id = request.user
         if order_form.is_valid():
-            address = request.POST.get("address", "")
-            post = request.POST.get("post", "")
-            receiver = request.POST.get("receiver", "")
-            mobile = request.POST.get("mobile", "")
-            userMessage = request.POST.get("userMessage", "")
-
-            order = Order()
-            order.address = address
-            order.post = post
-            order.receiver = receiver
-            order.mobile = mobile
-            order.userMessage = userMessage
-            order.status = "waitPay"
-            order.user_id = request.user.id
-
-            order.orderCode = int(datetime.datetime.now().strftime('%y%m%d%H%M%S')) * 10000 + random.randint(0,
-                                                                                                             9999)
-            order.save()
+            order_ask = order_form.save(commit=False)
+            # order_ask.status = "waitPay"
+            order_ask.user = user_id
+            order_ask.save()
             all_oi = OrderItem.objects.filter(order_id__isnull=True, user_id=user_id)
             all_unit = 0
             for oi in all_oi:
-                oi.order = order
+                oi.order = order_ask
                 oi.save()
                 unit = oi.product.promoteprice * oi.number
                 all_unit += unit
             return render(request, "order_payment.html", {
                 "all_unit": all_unit,
-                "order": order,
+                "order": order_ask,
             })
         else:
             return HttpResponse("妈的，出问题了，赶紧查查CreateOrderView", content_type='text')
@@ -160,11 +146,22 @@ class MyOrderView(View):
 # 评价页面
 class ReviewView(View):
     def get(self, request):
-        item_id = request.GET.get("pid", "")
-        item = Product.objects.get(id=item_id)
+        order_item_id = request.GET.get("oid", "")
+        oi = OrderItem.objects.get(id=order_item_id)
         return render(request, "order_review.html", {
-            "item": item,
+            "order_item": oi,
         })
 
     def post(self, request):
-        pass
+        review_form = ReviewForm(request.POST)
+        order_item_id = request.GET.get("oi", "")
+        oi = OrderItem.objects.get(id=order_item_id)
+        if review_form.is_valid():
+            review_ask = review_form.save(commit=True)
+            all_review = Review.objects.filter(product=review_ask.product)
+            # oi.
+            return render(request, "order_review.html", {
+                "all_review": all_review,
+                "show_only": True,
+                "order_item": oi,
+            })

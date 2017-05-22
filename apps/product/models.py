@@ -2,9 +2,10 @@
 
 from __future__ import unicode_literals
 
-from datetime import datetime
+# from datetime import datetime
 
 from django.db import models
+from django.utils import timezone
 
 from users.models import UserProfile
 # Create your models here.
@@ -66,7 +67,7 @@ class Product(models.Model):
     orignalPrice = models.FloatField(verbose_name=u"原始价格")
     promoteprice = models.FloatField(verbose_name=u"优惠价格")
     stock = models.FloatField(verbose_name=u"库存")
-    createDate = models.DateTimeField(verbose_name=u"创建时间", default=datetime.now)
+    createDate = models.DateTimeField(verbose_name=u"创建时间", default=timezone.now)
     category = models.ForeignKey(Category, verbose_name=u"分类")
     saleCount = models.IntegerField(verbose_name=u"销售数量")
 
@@ -141,7 +142,7 @@ class ProductDetailImage(models.Model):
 class Review(models.Model):
     # 产品评价
     content = models.TextField(verbose_name=u"评价内容")
-    createDate = models.DateTimeField(verbose_name=u"创建时间")
+    createDate = models.DateTimeField(verbose_name=u"创建时间", default=timezone.now())
     product = models.ForeignKey(Product, verbose_name=u"所属商品")
     user = models.ForeignKey(UserProfile, verbose_name=u"所属用户")
 

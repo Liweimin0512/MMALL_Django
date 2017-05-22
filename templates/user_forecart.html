@@ -234,7 +234,7 @@ function syncPrice(pid,num,price){
 				</tr>
 			</thead>
 			<tbody>
-            {% for order in all_order_item %}
+            {% for order in all_cat_item %}
                 <tr oiid="{{ order.id }}" class="cartProductItemTR">
 						<td>
 							<img selectit="false" oiid="{{ order.id }}" class="cartProductItemIfSelected" src="{% static 'img/site/cartNotSelected.png' %}">
