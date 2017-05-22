@@ -3,7 +3,7 @@ __author__ = 'hetao'
 __date__ = '2017/5/20 15:53'
 from django.conf.urls import url
 
-from .views import ForeProductView, CreateOrderView, MyOrderView, AddCartView, ForeCatView, PayedView, ReviewView
+from .views import ForeProductView, CreateOrderView, MyOrderView, AddCartView, ForeCatView, PayedView, ReviewView, ConfirmPayView, ForeCatBuyView
 
 urlpatterns = [
     # 结算页面
@@ -17,9 +17,15 @@ urlpatterns = [
     url(r'^foreaddCart/$', AddCartView.as_view(), name="addCart"),
     # 查看购物车
     url(r'^forecat/$', ForeCatView.as_view(), name="foreCat"),
-    # 支付成功页
+    # 支付页面，支付成功页
     url(r'^forepayed/$', PayedView.as_view(), name="payedSuccess"),
+    # 确认收货
+    url(r'^confirmPay/$', ConfirmPayView.as_view(), name="confirmPay"),
 
     # 评价页面
     url(r'^reveiw/$', ReviewView.as_view(), name="review"),
+
+    # 购物车中的立即购买
+    url(r'^forebuy/$', ForeCatBuyView.as_view(), name="foreCatBuy"),
+
 ]

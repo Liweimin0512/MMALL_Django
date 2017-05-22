@@ -13,6 +13,7 @@ from .forms import OrderForm, ReviewForm
 # Create your views here.
 
 
+# 立即购买
 class ForeProductView(View):
     def get(self, request):
         # 获取商品、数量
@@ -168,3 +169,28 @@ class ReviewView(View):
                 "show_only": True,
                 "order_item": oi,
             })
+
+
+class ConfirmPayView(View):
+    def get(self, request):
+        order_item_id = request.GET.get("oid", "")
+        oi = OrderItem.objects.get(id=order_item_id)
+        return render(request, "order_confirmPay.html", {
+            "order_item": oi,
+        })
+
+
+class ForeCatBuyView(View):
+    def get(self, request):
+        oiids = request.GET.getlist("oiid", [])
+        all_oi = []
+        total = 0
+        for oiid in oiids:
+            oi = OrderItem.objects.get(id=int(oiid))
+            all_oi.append(oi)
+            total += oi.product.promoteprice * oi.number
+        return render(request, "order_settlement.html", {
+            "all_order_item": all_oi,
+            "all_unit": total,
+        })
+

@@ -58,7 +58,7 @@ $(function(){
 	$(".ask2delivery").click(function(){
 		var link = $(this).attr("link");
 		$(this).hide();
-		page = link;
+		page = {% url 'operation:myOrder' %};
 		$.ajax({
 			   url: page,
 			   success: function(result){
@@ -120,7 +120,7 @@ $(function(){
 						<td class="orderItemProductInfoPartTD"><img width="80" height="80" src="{{ MEDIA_URL }}{{ order_item.product.get_title_image.image }}"></td>
 						<td class="orderItemProductInfoPartTD">
 							<div class="orderListItemProductLinkOutDiv">
-								<a href="#nowhere">{{ order_item.product.name }}</a>
+								<a href="{% url 'product:item' order_item.product.id %}">{{ order_item.product.name }}</a>
 								<div class="orderListItemProductLinkInnerDiv">
 											<img src="{% static 'img/site/creditcard.png' %}" title="支持信用卡支付">
 											<img src="{% static 'img/site/7day.png' %}" title="消费者保障服务,承诺7天退货">
@@ -152,7 +152,7 @@ $(function(){
                 {% endfor %}
                             {% ifequal order.status "waitPay" %}
                                 <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
-                                <a href="#nowhere">
+                                <a href="{% url 'operation:settlement' %}?oid={{ order.id }}">
                                     <button  class="orderListItemConfirm">付款</button>
                                 </a>
                                 </td>
@@ -165,7 +165,7 @@ $(function(){
                             {% endifequal %}
                             {% ifequal order.status "waitConfirm" %}
                                 <td valign="middle" rowspan="{{ order.get_order_count }}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
-                                <a href="#nowhere">
+                                <a href="{% url 'operation:confirmPay' %}?oid={{ order.id }}">
                                     <button  class="orderListItemConfirm">确认收货</button>
                                 </a>
                                 </td>

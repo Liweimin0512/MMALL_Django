@@ -148,7 +148,7 @@
 			</div>
 			<div class="productReviewItemUserInfo">
 
-				{{ review.user_id }}<span class="userInfoGrayPart">（匿名还没实现）</span>
+				{{ review.user.username|slice:'10' }}<span class="userInfoGrayPart">（匿名还没实现）</span>
 			</div>
 
 			<div style="clear:both"></div>
