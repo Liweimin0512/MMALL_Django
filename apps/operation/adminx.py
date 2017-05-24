@@ -5,11 +5,18 @@ __date__ = '2017/4/22 17:52'
 import xadmin
 from .models import Order,OrderItem
 
+
 class OrderAdmin(object):
-    pass
+    readonly_fields = ["orderCode", "address", "post",
+                       "receiver", "mobile", "userMessage",
+                       "createDate", "payDate", "confirmDate",
+                       "user"]
+
 
 class OrderItemAdmin(object):
     pass
 
-xadmin.site.register(Order,OrderAdmin)
-xadmin.site.register(OrderItem,OrderItemAdmin)
+xadmin.site.register(Order, OrderAdmin)
+xadmin.site.register(OrderItem, OrderItemAdmin)
+
+
