@@ -95,6 +95,7 @@ function syncSelect(){
     else
         $("img.selectAllItem").attr("src",baseVar.cartNotSelected);
 }
+
 function syncCreateOrderButton(){
     var selectAny = false;
     $(".cartProductItemIfSelected").each(function(){
