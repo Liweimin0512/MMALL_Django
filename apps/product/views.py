@@ -4,6 +4,7 @@ from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Category, Product
+from operation.models import OrderItem
 
 # Create your views here.
 
@@ -40,14 +41,17 @@ class IndexView(View):
     def get(self, request):
         all_category = Category.objects.all()
         all_product = Product.objects.all()
-
+        user = request.user
+        if user.is_authenticated():
+            user_cat_count = OrderItem.objects.filter(user=user, order_id__isnull=True).count()
+        else:
+            user_cat_count = 0
         return render(request, "index.html", {
             "all_category": all_category,
             "all_product": all_product,
+            "user": user,
+            "user_product_cat": user_cat_count
         })
-
-    def post(self, request):
-        pass
 
 
 class ItemView(View):

@@ -56,8 +56,16 @@ class LogoutView(View):
         # 重定向
         return HttpResponsePermanentRedirect(reverse('login'))
 
-    def post(self, request):
-        pass
+
+class myLogoutView(View):
+    '''
+    用户登出
+    '''
+
+    def get(self, request):
+        logout(request)
+        # 重定向
+        return HttpResponsePermanentRedirect(reverse('login'))
 
 
 # 注册功能

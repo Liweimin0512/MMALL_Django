@@ -16,6 +16,11 @@ $(function(){
 	$("div.productsAsideCategorys").mouseleave(function(){
 		$(this).hide();
 	});
+	$("div.productsAsideCategorys div.row a").each(function () {
+        var v = Math.round(Math.random() * 6);
+        if (v == 1)
+            $(this).css("color", "#87CEFA");
+    });
 
 	$("div.rightMenu span").mouseenter(function(){
 		var left = $(this).position().left;

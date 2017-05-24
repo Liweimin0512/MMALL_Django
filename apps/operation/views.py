@@ -152,10 +152,13 @@ class PayedView(View):
 class MyOrderView(View):
     def get(self, request):
         user = request.user
-        os = Order.objects.filter(user_id=user.id).exclude(status="delete")
-        return render(request, "order_myOrder.html", {
-            "orders": os,
-        })
+        if user.is_authenticated():
+            os = Order.objects.filter(user_id=user.id).exclude(status="delete")
+            return render(request, "order_myOrder.html", {
+                "orders": os,
+            })
+        else:
+            return render(request, "user_login.html")
 
 
 # 评价页面
