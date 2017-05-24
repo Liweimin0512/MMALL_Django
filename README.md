@@ -39,7 +39,16 @@
   1 确保你安装了正确版本的mysql
   2 在setting.py中将DATABASES文件修改为你本地的数据库。
   ```python
-  
+  DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "imitationtmall",
+        'USER': "root",
+        'PASSWORD': "admin",
+        'HOST': "127.0.0.1",
+
+    }
+}
   ```
 
 
