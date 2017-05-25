@@ -8,32 +8,33 @@
 {% endblock %}
 
 {% block content %}
-<div class="categorySortBar">
+    <div class="categoryPageDiv">
+        <div class="categorySortBar">
 
-	<table class="categorySortBarTable categorySortTable">
-		<tr>
-			<td {% ifequal sort 'alls' %}class="grayColumn"{% endifequal %} {% ifequal sort '' %}class="grayColumn"{% endifequal %}>
-                <a href="?sort=alls">综合<span class="glyphicon glyphicon-arrow-down"></span></a></td>
-			<td {% ifequal sort 'review' %}class="grayColumn"{% endifequal %}><a href="?sort=review">人气<span class="glyphicon glyphicon-arrow-down"></span></a></td>
-			<td {% ifequal sort 'date' %}class="grayColumn"{% endifequal %}><a href="?sort=date">新品<span class="glyphicon glyphicon-arrow-down"></span></a></td>
-			<td {% ifequal sort 'sale_count' %}class="grayColumn"{% endifequal %}><a href="?sort=sale_count">销量<span class="glyphicon glyphicon-arrow-down"></span></a></td>
-			<td {% ifequal sort 'price' %}class="grayColumn"{% endifequal %}><a href="?sort=price">价格<span class="glyphicon glyphicon-resize-vertical"></span></a></td>
-		</tr>
-	</table>
+        <table class="categorySortBarTable categorySortTable">
+            <tr>
+                <td {% ifequal sort 'alls' %}class="grayColumn"{% endifequal %} {% ifequal sort '' %}class="grayColumn"{% endifequal %}>
+                    <a href="?sort=alls">综合<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td {% ifequal sort 'review' %}class="grayColumn"{% endifequal %}><a href="?sort=review">人气<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td {% ifequal sort 'date' %}class="grayColumn"{% endifequal %}><a href="?sort=date">新品<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td {% ifequal sort 'sale_count' %}class="grayColumn"{% endifequal %}><a href="?sort=sale_count">销量<span class="glyphicon glyphicon-arrow-down"></span></a></td>
+                <td {% ifequal sort 'price' %}class="grayColumn"{% endifequal %}><a href="?sort=price">价格<span class="glyphicon glyphicon-resize-vertical"></span></a></td>
+            </tr>
+        </table>
 
-	<table class="categorySortBarTable">
-		<tr>
-			<td><input class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
-			<td class="grayColumn priceMiddleColumn">-</td>
-			<td><input class="sortBarPrice endPrice" type="text" placeholder="请输入"></td>
-		</tr>
-	</table>
+        <table class="categorySortBarTable">
+            <tr>
+                <td><input class="sortBarPrice beginPrice" type="text" placeholder="请输入"></td>
+                <td class="grayColumn priceMiddleColumn">-</td>
+                <td><input class="sortBarPrice endPrice" type="text" placeholder="请输入"></td>
+            </tr>
+        </table>
 
-</div>
+        </div>
 
-<div class="categoryProducts">
-    {% for product in all_product %}
-    <div class="productUnit" price="{{ product.promoteprice }}">
+        <div class="categoryProducts">
+        {% for product in all_product %}
+        <div class="productUnit" price="{{ product.promoteprice }}">
 			<div class="productUnitFrame">
 				<a href="{% url 'product:item' product.id %}">
 					<img class="productImage" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}">
@@ -57,10 +58,8 @@
 				</div>
 			</div>
 		</div>
-    {% endfor %}
+        {% endfor %}
 		<div style="clear:both"></div>
-</div>
-	</div>
-
-</div>
+        </div>
+    </div>
 {% endblock %}

@@ -52,10 +52,10 @@
         <a href="index.html">
         <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
     </a>
-        <form  method="post" >
+        <form  method="post" action="{% url 'product:queryResult' %}" autocomplete="off">
         <div class="searchDiv">
             <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
-            <button  type="button" class="searchButton">搜索</button>
+            <button  type="submit" class="searchButton">搜索</button>
             <div class="searchBelow">
                 {% for category in all_category %}
                 {% if forloop.counter <= 4 %}
@@ -67,6 +67,7 @@
                 {% endfor %}
             </div>
         </div>
+        {% csrf_token %}
     </form>
     </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 # _*_encoding:utf8_*_
 from django.shortcuts import render
 from django.views.generic.base import View
+from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Category, Product
@@ -73,3 +74,13 @@ class ItemView(View):
             "item": item,
             "all_review": reviews,
         })
+
+
+class QueryResultView(View):
+    # 搜索结果页面
+    def post(self, request):
+        search_keywords = request.POST['keyword']
+        if search_keywords:
+            all_products = Product.objects.filter(Q(name__icontains=search_keywords) |
+                                                  Q(subTitle__icontains=search_keywords))
+        return render(request, "product_queryResult.html", {"all_products": all_products})

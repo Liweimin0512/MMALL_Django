@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% block title %}
+搜索结果页by维民
+{% endblock %}
+{% block content %}
+<div id="searchResult">
+	<div class="searchResultDiv">
+        <div class="searchProducts">
+        {% for product in all_products %}
+        	<div class="productUnit" price="{{ product.promoteprice }}">
+			<a href="{% url 'product:item' product.id %}">
+				<img class="productImage" src="{{ MEDIA_URL }}{{ product.get_title_image.image }}">
+			</a>
+			<span class="productPrice">¥{{ product.promoteprice }}</span>
+			<a class="productLink" href="{% url 'product:item' product.id %}">
+			 {{ product.name }}
+			</a>
+
+			<a class="tmallLink" href="{% url 'product:item' product.id %}">天猫专卖</a>
+
+			<div class="show1 productInfo">
+				<span class="monthDeal ">月成交 <span class="productDealNumber">{{ product.saleCount }}笔</span></span>
+				<span class="productReview">评价<span class="productReviewNumber">{{ product.get_review.count }}</span></span>
+				<span class="wangwang"><img src="{% static 'img/site/wangwang.png' %}"></span>
+			</div>
+
+		</div>
+        {% endfor %}
+		<div style="clear:both"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
