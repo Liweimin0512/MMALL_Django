@@ -33,13 +33,18 @@
 # 如何部署项目
 这个我也在研究。
 
+## 前端素材
+前端文件来源于此网站：[HOW2J.CN](http://how2j.cn/)（一个很不错的学习java web开发的网站，安利一发）
+项目开发过程中，由于使用了django模板template系统，因此已经将原文件改的有点儿面目全非了。<del>想到自己还没静下心真正学习前端技术呢。算是一次修炼吧。</del>
+用到了Bootstrap
+
 # 如何启动项目
 + 首先将项目克隆到本地，然后添加虚拟环境，项目依赖包。
 + 配置数据库
   1 确保你安装了正确版本的mysql
   2 在setting.py中将DATABASES文件修改为你本地的数据库。
-  ```python
-  DATABASES = {
+```python
+  DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "imitationtmall",
@@ -48,14 +53,12 @@
         'HOST': "127.0.0.1",
 
     }
-}
+ }
 ```
+
 + 之后利用```migrate```命令来创建数据表
 + 我在项目中提供了我的数据库备份，可以直接将数据库内容导入。
 + 然后run server
-## 前端素材
-前端文件来源于此网站：[HOW2J.CN](http://how2j.cn/)（一个很不错的学习java web开发的网站，安利一发）
-项目开发过程中，由于使用了django模板template系统，因此已经将原文件改的有点儿面目全非了。<del>想到自己还没静下心真正学习前端技术呢。算是一次修炼吧。</del>
-用到了Bootstrap
+
 
 
