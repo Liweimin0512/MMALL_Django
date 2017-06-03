@@ -41,4 +41,12 @@ $(function(){
 	$("div.categoryWithCarousel div.head").css("margin-left",left);
 	$("div.productsAsideCategorys").css("left",left-20);
 
+	//全局搜索按键响应
+		$("form.searchForm").submit(function(){
+			if(keyword==""){
+				return
+			}else{
+				return true;
+			}
+	});
 });

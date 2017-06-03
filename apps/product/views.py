@@ -83,4 +83,5 @@ class QueryResultView(View):
         if search_keywords:
             all_products = Product.objects.filter(Q(name__icontains=search_keywords) |
                                                   Q(subTitle__icontains=search_keywords))
-        return render(request, "product_queryResult.html", {"all_products": all_products})
+            return render(request, "product_queryResult.html", {"all_products": all_products})
+

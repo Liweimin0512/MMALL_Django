@@ -52,9 +52,9 @@
         <a href="index.html">
         <img id="logo" src="{% static 'img/site/logo.gif' %}" class="logo">
     </a>
-        <form  method="post" action="{% url 'product:queryResult' %}" autocomplete="off">
+        <form class="searchForm" method="post" action="{% url 'product:queryResult' %}" autocomplete="off">
         <div class="searchDiv">
-            <input name="keyword" type="text" placeholder="时尚男鞋  太阳镜 ">
+            <input name="keyword" type="text" placeholder="时尚男鞋">
             <button  type="submit" class="searchButton">搜索</button>
             <div class="searchBelow">
                 {% for category in all_category %}
