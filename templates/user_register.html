@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+{% block title %}注册页面by维民{% endblock %}
+
+{% load staticfiles %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+{% endblock %}
+
+{% block search %}
+<div class="searchOutDiv">
+        <a href="index.html">
+        <img src="{% static 'img/site/simpleLogo.png' %}" class="simpleLogo" id="simpleLogo">
+        </a>
+        <form  method="post" >
+            <div class="simpleSearchDiv pull-right">
+                <input type="text" name="keyword" placeholder="平衡车 原汁机">
+                <button type="button" class="searchButton">搜天猫</button>
+                <div class="searchBelow">
+                        {% for category in all_category %}
+                        {% if forloop.counter <= 4 %}
+                        <span>
+                        <a href="{% url 'product:category' category.id %}">{{ category.name }}</a>
+                        <span>|</span>
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block content %}
+<section class="body">
+    <form id="email_register_form" method="post" action="{% url 'register' %}" autocomplete="off">
+    <div class="registerDiv">
+    	<div class="registerErrorMessageDiv">
+		    <div class="alert alert-danger" role="alert">
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+		  	    <span class="errorMessage">
+                    {% for key,error in register_form.errors.items %}
+                        {{ error }}
+                    {% endfor %}
+                    {{ msg }}
+                </span>
+		    </div>
+	    </div>
+    <table align="center" class="registerTable">
+        <tbody>
+        <tr>
+            <td class="registerTip registerTableLeftTD">设置会员名</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">注册邮箱</td>
+            <td class="registerTableRightTD"><input placeholder="注册邮箱一旦设置成功，无法修改" name="email" id="email" value="{{ register_form.email.value }}"> </td>
+        </tr>
+        <tr>
+            <td class="registerTip registerTableLeftTD">设置登陆密码</td>
+            <td class="registerTableRightTD">登陆时验证，保护账号信息</td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">登陆密码</td>
+            <td class="registerTableRightTD"><input type="password" placeholder="设置你的登陆密码" name="password" id="password" value="{{ register_form.email.value }}"> </td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">密码确认</td>
+            <td class="registerTableRightTD"><input type="password" placeholder="请再次输入你的密码" name="repeatpassword" id="repeatpassword" value="{{ register_form.email.value }}"> </td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">验证码</td>
+            <td class="registerTableRightTD" >{{ register_form.captcha }}</td>
+        </tr>
+{#        <tr>#}
+{#            <td class="registerTableRightTD">{% for key,error in register_form.errors.items %}{{ key }}{{ "是必填项" }}{% endfor %}{{ msg }}</td>#}
+{#        </tr>#}
+        <tr>
+            <td class="registerButtonTD" colspan="2">
+                <a href="#nowhere" onclick="checkUser()"><button>提   交</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        {% csrf_token %}
+    </div>
+    </form>
+</section>
+{% endblock %}
+
+

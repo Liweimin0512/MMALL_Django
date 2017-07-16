@@ -14,7 +14,7 @@ def random_str(randomlength = 8):
     length = len(chars) - 1
     random = Random()
     for i in range(randomlength):
-        str +=chars[random.randint(0,length)]
+        str +=chars[random.randint(0, length)]
     return str
 
 
@@ -38,8 +38,8 @@ def send_register_email(email, send_type="register"):
             pass
 
     elif send_type == "forget":
-        email_title = "仿天猫网站找回密码链接"
-        email_body = "请点击下方链接找回你的密码：http://127.0.0.1:8000/reset/{0}".format(code)
+        email_title = "仿天猫网站密码重置链接"
+        email_body = "请点击下方链接重置你的密码：http://127.0.0.1:8000/reset/{0}".format(code)
 
         send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
         if send_status:

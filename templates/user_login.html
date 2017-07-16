@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title %}登陆页面by维民{% endblock %}
+
+{% load staticfiles %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock %}
+
+{% block top %}
+{% endblock %}
+{% block search %}
+{% endblock %}
+{% block content %}
+    <section class="body">
+	<div id="loginDiv" style="position: relative">
+		<div class="simpleLogo">
+			<img src="{% static 'img/site/simpleLogo.png' %}">
+		</div>
+
+		<img id="loginBackgroundImg" class="loginBackgroundImg" src="{% static 'img/site/loginBackground.png' %}">
+
+		<form class="loginForm"  method="post" action="{% url 'login' %}" autocomplete="off">
+			<div id="loginSmallDiv" class="loginSmallDiv">
+				<div class="loginErrorMessageDiv">
+					<div class="alert alert-danger" >
+				  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+				  		<span class="errorMessage">
+                            {% for key,error in login_form.errors.items %}
+				  		        {{ error }}
+				  		    {% endfor %}
+				  		</span>
+					</div>
+				</div>
+
+				<div class="login_acount_text">账户登录</div>
+				<div class="loginInput " >
+					<span class="loginInputIcon ">
+						<span class=" glyphicon glyphicon-user"></span>
+					</span>
+					<input id="username" name="username" placeholder="手机/会员名/邮箱" type="text">
+				</div>
+				<div class="loginInput " >
+					<span class="loginInputIcon ">
+						<span class=" glyphicon glyphicon-lock"></span>
+					</span>
+					<input id="password" name="password" type="password" placeholder="密码" type="text">
+				</div>
+    			<span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
+				<div>
+					<a class="notImplementLink" href="{% url 'forget_pwd' %}">忘记登录密码</a>
+					<a class="pull-right" href="{% url 'register' %}">免费注册</a>
+				</div>
+				<div style="margin-top:20px">
+					<button class="btn btn-block redButton" type="submit">登录</button>
+				</div>
+			</div>
+            {% csrf_token %}
+		</form>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block title %}支付页面by维民{% endblock %}
+{% load static %}
+
+{% block extra_js %}
+
+{% endblock %}
+{% block content %}
+    <div class="aliPayPageDiv">
+	<div class="aliPayPageLogo">
+		<img class="pull-left" src="{% static 'img/site/simpleLogo.png' %}">
+		<div style="clear:both"></div>
+	</div>
+
+	<div>
+		<span class="confirmMoneyText">扫一扫付款（元）</span>
+		<span class="confirmMoney">
+		￥{{ all_unit }}</span>
+
+	</div>
+	<div>
+		<img class="aliPayImg" src="{% static 'img/site/alipay2wei.png' %}">
+	</div>
+
+	<div>
+		<a href="{% url 'operation:payedSuccess' %}?oid={{ order.id }}"><button class="confirmPay">确认支付</button></a>
+	</div>
+
+</div>
+{% endblock %}
+
+
+﻿

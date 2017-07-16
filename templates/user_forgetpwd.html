@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% block title %}修改密码页面by维民{% endblock %}
+
+{% load staticfiles %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/forgetpwd.js' %}"></script>
+{% endblock %}
+
+{% block top %}
+    <section class="top">
+	<nav class="top">
+        <div class="top_middle">
+            <a href="{% url 'index' %}">
+            <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon glyphicon-home redColor"></span>
+            天猫首页
+            </a>
+
+            {% if request.user.is_authenticated %}
+            <a href="/login/">Hi,{{ request.user.username }}</a>
+            <a href="#nowhere">积分</a>
+            <a href="#nowhere">消息</a>
+            <a href="{% url 'logout' %}">退出</a>
+            {% else %}
+            <span>喵，欢迎来天猫</span>
+            <a href="{% url 'login' %}">请登录</a>
+            <a href="{% url 'register' %}">免费注册</a>
+            {% endif %}
+
+        <span class="pull-right">
+            <a href="#nowhere">我的订单</a>
+            <a href="#nowhere">
+            <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
+            购物车<strong>0</strong>件</a>
+        </span>
+        </div>
+	</nav>
+    <div class="searchOutDiv">
+        <a href="index.html">
+        <img src="{% static 'img/site/simpleLogo.png' %}" class="simpleLogo" id="simpleLogo">
+        </a>
+        <form  method="post" >
+            <div class="simpleSearchDiv pull-right">
+                <input type="text" name="keyword" placeholder="平衡车 原汁机">
+                <button type="button" class="searchButton">搜天猫</button>
+                <div class="searchBelow">
+                        {% for category in all_category %}
+                        {% if forloop.counter <= 4 %}
+                        <span>
+                        <a href="{% url 'product:category' category.id %}">{{ category.name }}</a>
+                        <span>|</span>
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="body">
+    <form id="forget_pwd_form" method="post" action="{% url 'forget_pwd' %}" autocomplete="off">
+    <div class="registerDiv">
+    <table align="center" class="registerTable">
+        <tbody>
+        <tr>
+            <td class="registerTip registerTableLeftTD">忘记密码</td>
+            <td>
+                <div class="registerErrorMessageDiv">
+		            <div class="alert alert-danger" role="alert">
+		                <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    <span class="errorMessage">
+                        {% for key,error in forget_form.errors.items %}
+                            {{ error }}
+                        {% endfor %}
+                    </span>
+		            </div>
+	            </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">邮箱</td>
+            <td class="registerTableRightTD"><input type="email" placeholder="你的邮箱地址" name="email" id="password" value="{{ forget_form.email.value }}"> </td>
+        </tr>
+        <tr>
+            <td class="registerTableLeftTD">验证码</td>
+            <td class="registerTableRightTD">{{ forget_form.captcha }}</td>
+        </tr>
+        <tr>
+            <td class="registerButtonTD" colspan="2">
+                <a href="#nowhere" onclick="checkUser()"><button>提   交</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+        {% csrf_token %}
+    </form>
+</section>
+{% endblock %}
+
+

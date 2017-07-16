@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'xadmin',
     'captcha',
+    'pure_pagination',
 ]
 AUTH_USER_MODEL = "users.UserProfile"
 
@@ -92,10 +93,10 @@ WSGI_APPLICATION = 'ImitationTmall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "tmall",
-        'USER':"root",
-        'PASSWORD':"admin",
-        'HOST':"127.0.0.1",
+        'NAME': "imitationtmall",
+        'USER': "root",
+        'PASSWORD': "admin",
+        'HOST': "127.0.0.1",
 
     }
 }

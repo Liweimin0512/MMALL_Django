@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+{% block title %}
+确认收货by维民
+{% endblock %}
+{% block search %}
+<div class="simpleSearchOutDiv">
+        <a href="index.html">
+        <img src="{% static 'img/site/simpleLogo.png' %}" class="simpleLogo" id="simpleLogo">
+        </a>
+        <form  method="post" >
+            <div class="simpleSearchDiv pull-right">
+                <input type="text" name="keyword" placeholder="平衡车 原汁机">
+                <button type="button" class="searchButton">搜天猫</button>
+                <div class="searchBelow">
+                        {% for category in all_category %}
+                        {% if forloop.counter <= 4 %}
+                        <span>
+                        <a href="{% url 'product:category' category.id %}">{{ category.name }}</a>
+                        <span>|</span>
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block content %}
+<div class="confirmPayPageDiv">
+	<div class="confirmPayImageDiv">
+		<img src="../static/img/site/comformPayFlow.png">
+		<div  class="confirmPayTime1">
+			2016-11-22 14:31:03
+		</div>
+		<div  class="confirmPayTime2">
+			2016-11-22 14:31:05
+		</div>
+		<div class="confirmPayTime3">
+			yyyy-MM-dd HH:mm:ss
+		</div>
+
+	</div>
+	<div class="confirmPayOrderInfoDiv">
+		<div class="confirmPayOrderInfoText">我已收到货，同意支付宝付款</div>
+	</div>
+	<div class="confirmPayOrderItemDiv">
+		<div class="confirmPayOrderItemText">订单信息</div>
+		<table class="confirmPayOrderItemTable">
+			<thead>
+				<th colspan="2">宝贝</th>
+				<th width="120px">单价</th>
+				<th width="120px">数量</th>
+				<th width="120px">商品总价 </th>
+				<th width="120px">运费</th>
+			</thead>
+
+				<tr>
+					<td><img width="50px" src="../static/img/productSingle_middle/1917.jpg"></td>
+					<td class="confirmPayOrderItemProductLink">
+						<a href="#nowhere">依然美佳欧式布艺沙发组合可拆洗新款实木雕花大户型奢华别墅家具</a>
+					</td>
+					<td>￥10,012.00</td>
+					<td>1</td>
+					<td><span class="conformPayProductPrice">￥7,008.40</span></td>
+					<td><span>快递 ： 0.00 </span></td>
+				</tr>
+
+		</table>
+
+		<div class="confirmPayOrderItemText pull-right">
+			实付款： <span class="confirmPayOrderItemSumPrice">￥7,008.40</span>
+		</div>
+
+	</div>
+	<div class="confirmPayOrderDetailDiv">
+
+		<table class="confirmPayOrderDetailTable">
+			<tr>
+				<td>订单编号：</td>
+				<td>201611221431032827483 <img width="23px" src="../static/img/site/confirmOrderTmall.png"></td>
+			</tr>
+			<tr>
+				<td>卖家昵称：</td>
+				<td>天猫商铺 <span class="confirmPayOrderDetailWangWangGif"></span></td>
+			</tr>
+			<tr>
+				<td>收货信息： </td>
+				<td>北京市天安门，张长城， 13911111111，10011 </td>
+			</tr>
+			<tr>
+				<td>成交时间：</td>
+				<td>2016-11-22 14:31:03</td>
+			</tr>
+		</table>
+
+	</div>
+	<div class="confirmPayButtonDiv">
+		<div class="confirmPayWarning">请收到货后，再确认收货！否则您可能钱货两空！</div>
+		<a href="#nowhere"><button class="confirmPayButton">确认支付</button></a>
+	</div>
+</div>
+{% endblock %}

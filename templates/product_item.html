@@ -1,0 +1,214 @@
+{% extends 'index.html' %}
+{% block title %}商品页面by维民{% endblock %}
+{% load static %}
+
+{% block extra_js %}
+<script>
+    var MyViewVar = {
+        stock: {{ item.stock }},
+        {% if request.user.is_authenticated %}
+            is_login:true,
+        {% else %}
+            is_login:false,
+        {% endif %}
+        foreBoughtPage:"{% url 'product:item' item.id %}",
+        foreAddCartPage:"{% url 'operation:addCart' %}",
+        pid: {{ item.id }},
+    };
+</script>
+<script type="text/javascript" src="{% static 'js/item.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="categoryPictureInProductPageDiv">
+	<img class="categoryPictureInProductPage" src="{% static 'img/category/68.jpg' %}">
+</div>
+
+<div class="productPageDiv">
+
+<div class="imgAndInfo">
+
+	<div class="imgInimgAndInfo">
+		<img src="{{ MEDIA_URL }}{{ item.get_title_image.image }}" class="bigImg">
+		<div class="smallImageDiv">
+        {% for img in item.get_single_image %}
+            <img src="{{ MEDIA_URL }}{{ img.image }}" bigImageURL="{{ MEDIA_URL }}{{ img.image }}" class="smallImage">
+        {% endfor %}
+		</div>
+
+		<div class="img4load hidden" ></div>
+	</div>
+
+	<div class="infoInimgAndInfo">
+
+		<div class="productTitle">
+			{{ item.name }}
+		</div>
+		<div class="productSubTitle">
+			{{ item.subTitle }}
+		</div>
+
+		<div class="productPrice">
+			<div class="juhuasuan">
+				<span class="juhuasuanBig" >聚划算</span>
+				<span>此商品即将参加聚划算，<span class="juhuasuanTime">1天19小时</span>后开始，</span>
+			</div>
+			<div class="productPriceDiv">
+				<div class="gouwujuanDiv"><img height="16px" src="{% static 'img/site/gouwujuan.png' %}">
+				<span> 全天猫实物商品通用</span>
+
+				</div>
+				<div class="originalDiv">
+					<span class="originalPriceDesc">价格</span>
+					<span class="originalPriceYuan">¥</span>
+					<span class="originalPrice">
+						{{ item.orignalPrice }}
+					</span>
+				</div>
+				<div class="promotionDiv">
+					<span class="promotionPriceDesc">促销价 </span>
+					<span class="promotionPriceYuan">¥</span>
+					<span class="promotionPrice">
+						{{ item.promoteprice }}
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="productSaleAndReviewNumber">
+			<div>销量 <span class="redColor boldWord"> {{ item.saleCount }}</span></div>
+			<div>累计评价 <span class="redColor boldWord"> {{ item.get_review.count }}</span></div>
+		</div>
+		<div class="productNumber">
+			<span>数量</span>
+			<span>
+				<span class="productNumberSettingSpan">
+				<input class="productNumberSetting" type="text" value="1">
+				</span>
+				<span class="arrow">
+					<a href="#nowhere" class="increaseNumber">
+					<span class="updown">
+							<img src="{% static 'img/site/increase.png' %}">
+					</span>
+					</a>
+
+					<span class="updownMiddle"> </span>
+					<a href="#nowhere"  class="decreaseNumber">
+					<span class="updown">
+							<img src="{% static 'img/site/decrease.png' %}">
+					</span>
+					</a>
+
+				</span>
+
+			件</span>
+			<span>库存{{ item.stock }}件</span>
+		</div>
+		<div class="serviceCommitment">
+			<span class="serviceCommitmentDesc">服务承诺</span>
+			<span class="serviceCommitmentLink">
+				<a href="#nowhere">正品保证</a>
+				<a href="#nowhere">极速退款</a>
+				<a href="#nowhere">赠运费险</a>
+				<a href="#nowhere">七天无理由退换</a>
+			</span>
+		</div>
+
+		<div class="buyDiv">
+			<a class="buyLink" href="{% url 'operation:buyOne' %}?pid={{ item.id }}">
+                <button class="buyButton">立即购买</button>
+            </a>
+			<a class="addCartLink" href="{% url 'operation:addCart' %}?pid={{ item.id }}">
+                <button class="addCartButton">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    加入购物车
+                </button>
+            </a>
+		</div>
+	</div>
+
+	<div style="clear:both"></div>
+
+</div>
+
+<div class="productReviewDiv" >
+	<div class="productReviewTopPart">
+		<a  href="#nowhere" class="productReviewTopPartSelectedLink">商品详情</a>
+		<a  href="#nowhere" class="selected">累计评价 <span class="productReviewTopReviewLinkNumber">{{ item.get_review.count }}</span> </a>
+	</div>
+
+	<div class="productReviewContentPart">
+        {% for review in item.get_review %}
+        <div class="productReviewItem">
+
+			<div class="productReviewItemDesc">
+				<div class="productReviewItemContent">
+					{{ review.content }}
+				</div>
+				<div class="productReviewItemDate">{{ review.createDate }}</div>
+			</div>
+			<div class="productReviewItemUserInfo">
+
+				{{ review.user.username|slice:'10' }}<span class="userInfoGrayPart">（匿名还没实现）</span>
+			</div>
+
+			<div style="clear:both"></div>
+
+		</div>
+        {% endfor %}
+	</div>
+
+    <!-- 分页器 -->
+    <div class="rate-page">
+        <div class="rate-patinator">
+            {% if all_review.has_previous %}
+                <a href="?{{ all_review.previous_page_number.querystring }}" class="prev">上一页</a>
+            {% else %}
+                <span class="disabled prev">上一页</span>
+            {% endif %}
+
+            {% for page in all_review.pages %}
+            {% if page %}
+                {% ifequal page all_review.number %}
+                    <span class="current page">{{ page }}</span>
+                {% else %}
+                    <a href="?{{ page.querystring }}" class="page">{{ page }}</a>
+                {% endifequal %}
+            {% else %}
+                ...
+            {% endif %}
+            {% endfor %}
+            {% if all_review.has_next %}
+            <a href="?{{ all_review.next_page_number.querystring }}" class="next">下一页</a>
+            {% else %}
+            <span class="disabled next">下一页</span>
+            {% endif %}
+        </div>
+        <div class="rate-chat"></div>
+    </div>
+</div>
+
+<div class="productDetailDiv" >
+	<div class="productDetailTopPart">
+		<a href="#nowhere" class="productDetailTopPartSelectedLink selected">商品详情</a>
+		<a href="#nowhere" class="productDetailTopReviewLink">累计评价 <span class="productDetailTopReviewLinkNumber">{{ item.get_review.count }}</span> </a>
+	</div>
+
+	<div class="productParamterPart">
+		<div class="productParamter">产品参数：</div>
+
+		<div class="productParamterList">
+        {% for property_value in item.get_property_value %}
+            <span>{{ property_value.property.name }}:  {{ property_value.value }} </span>
+        {% endfor %}
+		</div>
+		<div style="clear:both"></div>
+	</div>
+
+	<div class="productDetailImagesPart">
+    {% for img in item.get_detail_image %}
+        <img src="{{ MEDIA_URL }}{{ img.image }}">
+    {% endfor %}
+	</div>
+</div>
+</div>
+{% endblock %}

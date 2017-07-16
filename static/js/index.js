@@ -16,6 +16,11 @@ $(function(){
 	$("div.productsAsideCategorys").mouseleave(function(){
 		$(this).hide();
 	});
+	$("div.productsAsideCategorys div.row a").each(function () {
+        var v = Math.round(Math.random() * 6);
+        if (v == 1)
+            $(this).css("color", "#87CEFA");
+    });
 
 	$("div.rightMenu span").mouseenter(function(){
 		var left = $(this).position().left;
@@ -36,4 +41,12 @@ $(function(){
 	$("div.categoryWithCarousel div.head").css("margin-left",left);
 	$("div.productsAsideCategorys").css("left",left-20);
 
+	//全局搜索按键响应
+		$("form.searchForm").submit(function(){
+			if(keyword==""){
+				return
+			}else{
+				return true;
+			}
+	});
 });

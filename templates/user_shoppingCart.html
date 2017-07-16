@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+{% block title %}购物车页面by维民{% endblock %}
+{% load staticfiles %}
+
+{% block extra_js %}
+    <script>
+    var cartVaule={
+        cartNotSelected:"{% static 'img/site/cartNotSelected.png' %}",
+        cartSelected:"{% static 'img/site/cartSelected.png' %}",
+        settlement:"{% url 'operation:buy' %}?",
+    }
+    </script>
+<script type="text/javascript" src="{% static 'js/forecart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="cartDiv">
+	<div class="cartTitle pull-right">
+		<span>已选商品  (不含运费)</span>
+		<span class="cartTitlePrice">￥0.00</span>
+		<button class="createOrderButton" disabled="disabled">结 算</button>
+	</div>
+
+	<div class="cartProductList">
+		<table class="cartProductTable">
+			<thead>
+				<tr>
+					<th class="selectAndImage">
+							<img selectit="false" class="selectAllItem" src="{% static 'img/site/cartNotSelected.png' %}">
+					全选
+					</th>
+					<th>商品信息</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th width="120px">金额</th>
+					<th class="operation">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+            {% for order in all_cat_item %}
+                <tr oiid="{{ order.id }}" class="cartProductItemTR">
+						<td>
+							<img selectit="false" oiid="{{ order.id }}" class="cartProductItemIfSelected" src="{% static 'img/site/cartNotSelected.png' %}">
+							<a style="display:none" href="#nowhere"><img src="{% static 'img/site/cartSelected.png' %}"></a>
+							<img class="cartProductImg"  src="{{ MEDIA_URL }}{{ order.product.get_title_image.image }}">
+						</td>
+						<td>
+							<div class="cartProductLinkOutDiv">
+								<a href="#nowhere" class="cartProductLink">{{ order.product.name }}</a>
+								<div class="cartProductLinkInnerDiv">
+									<img src="{% static 'img/site/creditcard.png' %}" title="支持信用卡支付">
+									<img src="{% static 'img/site/7day.png' %}" title="消费者保障服务,承诺7天退货">
+									<img src="{% static 'img/site/promise.png' %}" title="消费者保障服务,承诺如实描述">
+								</div>
+							</div>
+
+						</td>
+						<td>
+							<span class="cartProductItemOringalPrice">￥{{ order.product.orignalPrice }}</span>
+							<span  class="cartProductItemPromotionPrice">￥{{ order.product.promoteprice }}</span>
+						</td>
+						<td>
+							<div class="cartProductChangeNumberDiv">
+								<span class="hidden orderItemStock " pid="{{ order.product.id }}">{{ order.product.stock }}</span>
+								<span class="hidden orderItemPromotePrice " pid="{{ order.product.id }}">{{ order.product.promoteprice }}</span>
+								<a  pid="{{ order.product.id }}" class="numberMinus" href="#nowhere">-</a>
+								<input pid="{{ order.product.id }}" oiid="{{ order.id }}" class="orderItemNumberSetting" autocomplete="off" value="{{ order.number }}">
+								<a  stock="{{ order.product.stock }}" pid="{{ order.product.id }}" class="numberPlus" href="#nowhere">+</a>
+							</div>
+						 </td>
+						<td >
+							<span class="cartProductItemSmallSumPrice" oiid="{{ order.id }}" pid="{{ order.product.id }}" >
+							￥{% widthratio order.product.promoteprice 1 order.number %}
+							</span>
+						</td>
+						<td>
+							<a class="deleteOrderItem" oiid="{{ order.id }}"  href="#nowhere">删除</a>
+						</td>
+					</tr>
+            {% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="cartFoot">
+		<img selectit="false" class="selectAllItem" src="{% static 'img/site/cartNotSelected.png' %}">
+		<span>全选</span>
+<!-- 		<a href="#">删除</a> -->
+		<div class="pull-right">
+			<span>已选商品 <span class="cartSumNumber" >0</span> 件</span>
+
+			<span>合计 (不含运费): </span>
+			<span class="cartSumPrice" >￥0.00</span>
+			<button class="createOrderButton" disabled="disabled" >结  算</button>
+		</div>
+
+	</div>
+</div>
+{% endblock %}

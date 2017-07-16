@@ -1,0 +1,107 @@
+{% extends 'index.html' %}
+{% block title %}
+评价页面by维民
+{% endblock %}
+{% load staticfiles %}
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+{% endblock %}
+{% block search %}
+<div class="simpleSearchOutDiv">
+        <a href="index.html">
+        <img src="{% static 'img/site/simpleLogo.png' %}" class="simpleLogo" id="simpleLogo">
+        </a>
+        <form  method="post" >
+            <div class="simpleSearchDiv pull-right">
+                <input type="text" name="keyword" placeholder="平衡车 原汁机">
+                <button type="button" class="searchButton">搜天猫</button>
+                <div class="searchBelow">
+                        {% for category in all_category %}
+                        {% if forloop.counter <= 4 %}
+                        <span>
+                        <a href="{% url 'product:category' category.id %}">{{ category.name }}</a>
+                        <span>|</span>
+                        </span>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block content %}
+<div class="reviewDiv">
+	<div class="reviewProductInfoDiv">
+		<div class="reviewProductInfoImg"><img width="400px" height="400px" src="{{ MEDIA_URL }}{{ order_item.product.get_title_image.image }}"></div>
+		<div class="reviewProductInfoRightDiv">
+			<div class="reviewProductInfoRightText">
+				{{ order_item.product.name }}
+			</div>
+			<table class="reviewProductInfoTable">
+				<tr>
+					<td width="75px">价格:</td>
+					<td><span class="reviewProductInfoTablePrice">￥{{ order_item.product.promoteprice }}</span> 元 </td>
+				</tr>
+				<tr>
+					<td>配送</td>
+					<td>快递:  0.00</td>
+				</tr>
+				<tr>
+					<td>月销量:</td>
+					<td><span class="reviewProductInfoTableSellNumber">{{ order_item.product.saleCount }}</span> 件</td>
+				</tr>
+			</table>
+
+			<div class="reviewProductInfoRightBelowDiv">
+				<span class="reviewProductInfoRightBelowImg"><img1 src="{% static 'img/site/reviewLight.png' %}"></span>
+				<span class="reviewProductInfoRightBelowText" >现在查看的是 您所购买商品的信息
+于{{ order_item.order.createDate }}下单购买了此商品 </span>
+
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<div class="reviewStasticsDiv">
+		<div class="reviewStasticsLeft">
+				<div class="reviewStasticsLeftTop"></div>
+				<div class="reviewStasticsLeftContent">累计评价 <span class="reviewStasticsNumber"> {{ order_item.product.get_review.count }}</span></div>
+				<div class="reviewStasticsLeftFoot"></div>
+		</div>
+		<div class="reviewStasticsRight">
+			<div class="reviewStasticsRightEmpty"></div>
+			<div class="reviewStasticsFoot"></div>
+		</div>
+	</div>
+    {% if show_only %}
+        <div class="reviewDivlistReviews">
+            {% for review in all_review %}
+            <div class="reviewDivlistReviewsEach">
+				<div class="reviewDate">{{ review.createDate }}</div>
+				<div class="reviewContent">{{ review.content }}</div>
+				<div class="reviewUserInfo pull-right">{{ review.user.username }}<span class="reviewUserInfoAnonymous">(匿名)</span></div>
+			</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="makeReviewDiv">
+		<form method="post" action="{% url 'operation:review' %}?oi={{ order_item.id }}" autocomplete="off" >
+			<div class="makeReviewText">其他买家，需要你的建议哦！</div>
+			<table class="makeReviewTable">
+				<tr>
+					<td class="makeReviewTableFirstTD">评价商品</td>
+					<td><textarea name="content"></textarea></td>
+				</tr>
+			</table>
+			<div class="makeReviewButtonDiv">
+				<input type="hidden" name="user" value="{{ order_item.user.id }}">
+				<input type="hidden" name="product" value="{{ order_item.product.id }}">
+				<button type="submit">提交评价</button>
+			</div>
+            {% csrf_token %}
+		</form>
+		</div>
+    {% endif %}
+
+
+</div>
+{% endblock %}
