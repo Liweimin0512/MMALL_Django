@@ -1,4 +1,5 @@
-看见有5个fork很惊喜，代码我会持续优化的，不过最近在添java那边的坑。所以，coming soooooon！
+如果最近不忙的话，我会将这个项目改为使用python3编写，并且使用djangorestframework来做前后端分离，前端计划使用vue.js\
+以此来对得起将近50人的star，欢迎加我qq和我交流：2410250284\
 # ImitationTmall
 + 仿照[天猫]()搭建的电商平台
 + 欢迎交流，也可以在issues中向我提问
